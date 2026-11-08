@@ -1,0 +1,28 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "some project",
+      "desc": "description of some project",
+      "tech": [
+        "Python",
+        "LangGraph",
+        "React",
+        "FastAPI"
+      ],
+      "role": "Frontend Developer",
+      "uni": "SDU University"
+    },
+    {
+      "title": "Test API Project",
+      "desc": "Testing POST request",
+      "tech": [
+        "JavaScript",
+        "Node.js"
+      ],
+      "role": "Backend Developer",
+      "uni": "SDU University",
+      "id": "GhNeQxgV0AE"
+    }
+  ]
+}

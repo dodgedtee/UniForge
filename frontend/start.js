@@ -360,7 +360,7 @@ function setupModal() {
     }
   });
 
-  form?.addEventListener("submit", e => {
+  form?.addEventListener("submit", async e => {
     e.preventDefault();
 
     const title = document.getElementById("post-title").value.trim();
@@ -370,19 +370,43 @@ function setupModal() {
     const desc = document.getElementById("post-desc").value.trim();
 
     if (activeModalType === "project") {
-      const tech = techRaw ? techRaw.split(",").map(t => t.trim()).filter(Boolean) : ["General"];
-      const newProj = {
-        id: Date.now(),
-        title,
-        desc,
-        tech,
-        role,
-        uni
-      };
-      projects.unshift(newProj);
+    const tech = techRaw
+      ? techRaw.split(",").map(t => t.trim()).filter(Boolean)
+      : ["General"];
+
+    const newProj = {
+      title,
+      desc,
+      tech,
+      role,
+      uni
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/projects", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newProj)
+      });
+
+      if (!response.ok) {
+        throw new Error("POST failed: " + response.status);
+      }
+
+      const savedProject = await response.json();
+      projects.unshift(savedProject);
       renderProjects(projects);
+
+      console.log("POST successful:", savedProject);
       showToast("Project successfully published!");
-    } else {
+    } catch (error) {
+      console.error("POST error:", error);
+      showToast("Failed to publish project");
+      return;
+    }
+  } else {
       const newHack = {
         id: Date.now(),
         title,
@@ -465,8 +489,22 @@ function setupFooterYear() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderProjects(projects);
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const response = await fetch("http://localhost:3000/projects");
+
+    if (!response.ok) {
+      throw new Error("Server error: " + response.status);
+    }
+
+    const data = await response.json();
+    renderProjects(data);
+
+    console.log("GET successful:", data);
+  } catch (error) {
+    console.error("GET error:", error);
+  }
+
   renderHackathons(hackathons);
   setupTabs();
   setupMobileMenu();
@@ -474,4 +512,3 @@ document.addEventListener("DOMContentLoaded", () => {
   setupHeroActions();
   setupFooterYear();
 });
-
