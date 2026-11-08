@@ -1,240 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniForge - Forge Your Dream Team</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniForge - The Student IT Collaboration & Hackathon Platform</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <div class="brand-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                    </svg>
-                </div>
-                <span class="brand-title">UniForge</span>
-            </div>
-
-            <div class="nav-links">
-                <a href="#" class="nav-link active">Home</a>
-                <a href="#projects-section" class="nav-link">Discover Projects</a>
-                <a href="#matchmaking-section" class="nav-link">Hackathons</a>
-                <a href="#" class="nav-link">My Workspace</a>
-            </div>
-
-            <div class="nav-actions">
-                <button class="btn btn-dark btn-new-post" id="btn-new-post">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    <span>New Post</span>
-                </button>
-
-                <a href="#" class="user-profile" id="user-profile" title="View Profile" aria-label="User Profile">
-                    <img src="avatar.png" alt="Profile Picture" class="profile-pic" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2394a3b8\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
-                </a>
-
-                <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
-                    <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <svg class="close-icon hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <div class="brand-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
         </div>
+        <span class="brand-title">UniForge</span>
+      </a>
 
-        <div class="mobile-menu" id="mobile-menu">
-            <a href="#" class="mobile-link active">Home</a>
-            <a href="#projects-section" class="mobile-link">Discover Projects</a>
-            <a href="#matchmaking-section" class="mobile-link">Hackathons</a>
-            <a href="#" class="mobile-link">My Workspace</a>
-            <button class="btn btn-dark mobile-new-post-btn" id="mobile-btn-new-post">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                <span>New Post</span>
-            </button>
-        </div>
-    </nav>
+      <div class="nav-links">
+        <a href="#why-uniforge" class="nav-link">Why UniForge</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#join" class="nav-link">Community</a>
+      </div>
 
-    <section class="hero-section">
-        <div class="hero-container">
-            <h1 class="hero-title">
-                Forge Your Dream Team.<br>
-                <span class="text-blue">Build the Future.</span>
-            </h1>
-            <p class="hero-desc">
-                Join the ultimate hub for university students. Share your visionary projects, contribute to open-source
-                student initiatives, and match with the perfect teammates for your next hackathon.
-            </p>
-            <div class="hero-actions">
-                <button class="btn btn-primary" id="btn-find-project">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="16 18 22 12 16 6"></polyline>
-                        <polyline points="8 6 2 12 8 18"></polyline>
-                    </svg>
-                    <span>Find a Project</span>
-                </button>
-                <button class="btn btn-secondary" id="btn-find-teammates">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                    <span>Find Hackathon Teammates</span>
-                </button>
-            </div>
-        </div>
-    </section>
+      <div class="nav-actions">
+        <button class="btn btn-primary btn-nav-cta" id="btn-nav-join">
+          <span>Join as Student</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
 
-    <main class="main-container">
-        <div class="content-grid">
+        <a href="#" class="user-profile" id="user-profile" title="View Profile" aria-label="User Profile">
+          <img src="avatar.png" alt="Profile Picture" class="profile-pic" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2394a3b8\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
+        </a>
 
-            <section class="projects-section" id="projects-section">
-                <div class="section-header">
-                    <div>
-                        <h2 class="section-title">Open Projects</h2>
-                        <p class="section-subtitle">Discover and contribute to exciting student-led initiatives.</p>
-                    </div>
-                    <a href="#" class="view-all-link" id="view-all-projects-desktop">
-                        <span>View All</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="projects-grid" id="projects-grid">
-                </div>
-
-                <button class="btn btn-secondary btn-full-width mobile-only-btn" id="view-all-projects-mobile">
-                    View All Projects
-                </button>
-            </section>
-
-            <section class="matchmaking-section" id="matchmaking-section">
-                <div class="section-header matchmaking-header">
-                    <div>
-                        <h2 class="section-title">Matchmaking</h2>
-                        <p class="section-subtitle">Find a team for upcoming hackathons.</p>
-                    </div>
-                </div>
-
-                <div class="tabs-wrapper">
-                    <div class="tabs-container">
-                        <button class="tab-btn active" id="tab-upcoming" data-tab="upcoming">Upcoming</button>
-                        <button class="tab-btn" id="tab-requests" data-tab="requests">My Requests</button>
-                    </div>
-                </div>
-
-                <div class="hackathons-list" id="hackathons-list">
-                </div>
-
-                <div class="event-host-card">
-                    <h3 class="event-host-title">Hosting an event?</h3>
-                    <p class="event-host-desc">Post your hackathon here to help students find teams faster.</p>
-                    <button class="btn btn-white" id="btn-list-hackathon">List a Hackathon</button>
-                </div>
-            </section>
-
-        </div>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-brand">
-                <div class="brand-icon-small">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                    </svg>
-                </div>
-                <span class="footer-brand-title">UniForge</span>
-            </div>
-
-            <div class="footer-links">
-                <a href="#" class="footer-link">About</a>
-                <a href="#" class="footer-link">Privacy</a>
-                <a href="#" class="footer-link">Terms</a>
-                <a href="#" class="footer-link">Contact</a>
-            </div>
-
-            <div class="footer-copyright">
-                &copy; <span id="current-year">2026</span> UniForge. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <div class="modal-backdrop hidden" id="action-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modal-title">Create a Post</h3>
-                <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
-            <form id="action-form" class="modal-form">
-                <div class="form-group">
-                    <label for="post-title">Title</label>
-                    <input type="text" id="post-title" class="form-input" placeholder="e.g. AI-Powered Campus Assistant"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="post-uni">University / Organization</label>
-                    <input type="text" id="post-uni" class="form-input" placeholder="e.g. SDU University" required>
-                </div>
-                <div class="form-group">
-                    <label for="post-role">Looking For / Role</label>
-                    <input type="text" id="post-role" class="form-input" placeholder="e.g. Backend Developer" required>
-                </div>
-                <div class="form-group">
-                    <label for="post-tech">Tech Stack (comma-separated)</label>
-                    <input type="text" id="post-tech" class="form-input" placeholder="e.g. React, Node.js, PostgreSQL"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="post-desc">Description</label>
-                    <textarea id="post-desc" rows="3" class="form-textarea"
-                        placeholder="Briefly describe your project or team goals..." required></textarea>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="modal-submit-btn">Publish</button>
-                </div>
-            </form>
-        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="close-icon hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <div class="toast-container" id="toast-container"></div>
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#why-uniforge" class="mobile-link">Why UniForge</a>
+      <a href="#how-it-works" class="mobile-link">How It Works</a>
+      <a href="#features" class="mobile-link">Features</a>
+      <a href="#join" class="mobile-link">Community</a>
+      <button class="btn btn-primary mobile-cta-btn" id="mobile-btn-join">
+        Join as Student
+      </button>
+    </div>
+  </nav>
 
-    <script src="start.js"></script>
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>Exclusive Platform for University IT Students</span>
+      </div>
+
+      <h1 class="hero-title">
+        Forge Your Dream Team.<br>
+        <span class="text-blue">Build the Future Together.</span>
+      </h1>
+
+      <p class="hero-desc">
+        UniForge unites passionate university developers, designers, and innovators. Team up for hackathons, build portfolio-worthy software, and grow your verifiable student reputation.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#join" class="btn btn-primary btn-large">
+          <span>Get Started with Student ID</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <a href="#how-it-works" class="btn btn-secondary btn-large">
+          <span>See How It Works</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Problem & Solution Section: Why UniForge -->
+  <section class="section problem-section" id="why-uniforge">
+    <div class="container">
+      <div class="section-intro">
+        <span class="section-tag">The Challenge</span>
+        <h2 class="section-heading">Why Students Need UniForge</h2>
+        <p class="section-subheading">
+          Entering hackathons and building software as a university student shouldn't be a solo or unreliable experience.
+        </p>
+      </div>
+
+      <div class="problem-grid">
+        <!-- Problem Card 1 -->
+        <div class="card problem-card">
+          <div class="card-icon problem-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <h3 class="card-title">Teammates Ghosting Mid-Hackathon</h3>
+          <p class="card-text">
+            Everyone has experienced finding teammates on random Telegram or Discord groups who vanish hours before the deadline with zero accountability.
+          </p>
+        </div>
+
+        <!-- Problem Card 2 -->
+        <div class="card problem-card">
+          <div class="card-icon problem-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <line x1="19" y1="8" x2="19" y2="14"></line>
+              <line x1="22" y1="11" x2="16" y2="11"></line>
+            </svg>
+          </div>
+          <h3 class="card-title">Isolated University Bubbles</h3>
+          <p class="card-text">
+            Students struggle to find complementary skills (like an ML specialist or UI/UX designer) because connections are confined to just their classroom.
+          </p>
+        </div>
+
+        <!-- Problem Card 3 -->
+        <div class="card problem-card">
+          <div class="card-icon problem-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <h3 class="card-title">Empty Resumes With No Team Proof</h3>
+          <p class="card-text">
+            Junior recruiters look for proven teamwork and real-world project commits, yet typical student coursework only offers toy individual assignments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section how-it-works-section" id="how-it-works">
+    <div class="container">
+      <div class="section-intro">
+        <span class="section-tag">Simple & Transparent</span>
+        <h2 class="section-heading">How UniForge Works</h2>
+        <p class="section-subheading">
+          A dedicated ecosystem designed from the ground up for university students to unite, build, and succeed.
+        </p>
+      </div>
+
+      <div class="steps-container">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <div class="step-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="step-title">Verified Student Registration</h3>
+            <p class="step-text">
+              Sign up using your official university credentials or student verification. UniForge is strictly gated for students to preserve an honest, collaborative environment.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <div class="step-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3 class="step-title">Build Your Live Portfolio</h3>
+            <p class="step-text">
+              List your tech stack, university, interests, and GitHub repositories. Highlight what roles you excel in — whether Frontend, Backend, AI/ML, Mobile, or UI/UX.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <div class="step-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            <h3 class="step-title">Discover Projects & Hackathons</h3>
+            <p class="step-text">
+              Post an innovative project idea or browse teams forming for hackathons and competitive programming events. Send and receive team invitations seamlessly.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div class="step-number">04</div>
+          <div class="step-content">
+            <div class="step-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="step-title">Fulfill Tasks & Boost Your Rating</h3>
+            <p class="step-text">
+              Deliver on your assigned milestones to earn peer ratings and reputation points. Reliable teamwork elevates your rating, unlocking high-tier teams and partner opportunities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Features / Pillars Section -->
+  <section class="section features-section" id="features">
+    <div class="container">
+      <div class="section-intro">
+        <span class="section-tag">Core Capabilities</span>
+        <h2 class="section-heading">Engineered for Student Builders</h2>
+        <p class="section-subheading">
+          Everything university developers need to build meaningful experience together.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1: Student Rating System -->
+        <div class="card feature-card">
+          <div class="feature-icon-box icon-star">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+          </div>
+          <h3 class="card-title">Student Reputation & Rating</h3>
+          <p class="card-text">
+            Accountability is at our core. Students who deliver their commitments gain rating points, while unfulfilled promises decrease reputation. This keeps teams honest and motivated.
+          </p>
+        </div>
+
+        <!-- Feature 2: Hackathon Matchmaking -->
+        <div class="card feature-card">
+          <div class="feature-icon-box icon-trophy">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+              <path d="M4 22h16"></path>
+              <path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34c3.27-.8 5-3.3 5-6.66V4H6v4c0 3.36 1.73 5.86 5 6.66Z"></path>
+            </svg>
+          </div>
+          <h3 class="card-title">Hackathon Matchmaking</h3>
+          <p class="card-text">
+            Prepare for upcoming incubations, tech jams, and competitive programming cups. Find teammates seeking specific tech stacks like React, FastAPI, Go, or PyTorch.
+          </p>
+        </div>
+
+        <!-- Feature 3: Verified Student Access -->
+        <div class="card feature-card">
+          <div class="feature-icon-box icon-shield">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 class="card-title">Students-Only Network</h3>
+          <p class="card-text">
+            Restricted exclusively to university students. Collaborate with peers from top universities (SDU, KBTU, NU, AITU, and more) who share your drive to learn and innovate.
+          </p>
+        </div>
+
+        <!-- Feature 4: Interactive Workspaces -->
+        <div class="card feature-card">
+          <div class="feature-icon-box icon-code">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h3 class="card-title">Project Collaboration Hub</h3>
+          <p class="card-text">
+            Have a bold startup or open-source idea? Create a project listing, define open roles, review applicant portfolios, and invite students to build together.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call to Action (CTA) Section -->
+  <section class="section cta-section" id="join">
+    <div class="container">
+      <div class="cta-banner">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to Forge Your Dream Team?</h2>
+          <p class="cta-desc">
+            Stop coding in isolation or gambling on random hackathon chats. Join UniForge and build alongside committed university students.
+          </p>
+          <div class="cta-actions">
+            <button class="btn btn-white btn-large" id="btn-cta-signup">
+              <span>Sign Up with Student ID</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+          <p class="cta-footnote">Free forever for university students • Quick 2-minute verification</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="brand-icon-small">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <span class="footer-brand-title">UniForge</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="#why-uniforge" class="footer-link">Why UniForge</a>
+        <a href="#how-it-works" class="footer-link">How It Works</a>
+        <a href="#features" class="footer-link">Features</a>
+        <a href="#join" class="footer-link">Join</a>
+      </div>
+
+      <div class="footer-copyright">
+        &copy; <span id="current-year">2026</span> UniForge. Built for student innovators.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Student Sign Up Modal Dialog -->
+  <div class="modal-backdrop hidden" id="join-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Join UniForge</h3>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <form id="join-form" class="modal-form">
+        <div class="form-group">
+          <label for="student-name">Full Name</label>
+          <input type="text" id="student-name" class="form-input" placeholder="e.g. Alikhan Saparov" required>
+        </div>
+        <div class="form-group">
+          <label for="student-uni">University</label>
+          <input type="text" id="student-uni" class="form-input" placeholder="e.g. SDU, KBTU, Nazarbayev University" required>
+        </div>
+        <div class="form-group">
+          <label for="student-email">University / Student Email</label>
+          <input type="email" id="student-email" class="form-input" placeholder="e.g. yourname@sdu.edu.kz" required>
+        </div>
+        <div class="form-group">
+          <label for="student-role">Primary Role / Interest</label>
+          <select id="student-role" class="form-input" required>
+            <option value="" disabled selected>Select your specialization</option>
+            <option value="frontend">Frontend Developer (React, Vue, Web)</option>
+            <option value="backend">Backend Developer (Python, Go, Java, Node)</option>
+            <option value="ai">AI / Machine Learning / Data Science</option>
+            <option value="mobile">Mobile Developer (Flutter, React Native, iOS, Android)</option>
+            <option value="uiux">UI/UX Designer</option>
+            <option value="cp">Competitive Programmer</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="modal-submit-btn">Apply for Early Access</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript -->
+  <script src="start.js"></script>
 </body>
-
 </html>
