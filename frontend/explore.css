@@ -1,0 +1,817 @@
+/* ==========================================================================
+   UniForge - Explorer Page Stylesheet (Hugging Face Hub Inspired)
+   ========================================================================== */
+
+.explore-body {
+  background-color: var(--slate-50);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.btn-dark {
+  background-color: var(--slate-900);
+  color: var(--white);
+}
+
+.btn-dark:hover {
+  background-color: var(--slate-800);
+  transform: translateY(-1px);
+}
+
+.nav-link-active {
+  color: var(--blue-600);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Main Two-Column Explorer Layout
+   -------------------------------------------------------------------------- */
+.explore-wrapper {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.explore-layout {
+  display: flex;
+  align-items: stretch;
+  min-height: calc(100vh - 68px);
+}
+
+/* --------------------------------------------------------------------------
+   Left Sidebar: Filters Panel
+   -------------------------------------------------------------------------- */
+.filter-sidebar {
+  width: 288px;
+  flex-shrink: 0;
+  background-color: var(--white);
+  border-right: 1px solid var(--slate-200);
+  padding: 1.5rem 1.25rem;
+  position: sticky;
+  top: 68px;
+  height: calc(100vh - 68px);
+  overflow-y: auto;
+}
+
+/* Subtle scrollbar for sidebar */
+.filter-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.filter-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filter-sidebar::-webkit-scrollbar-thumb {
+  background: var(--slate-200);
+  border-radius: 9999px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.sidebar-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--slate-800);
+}
+
+.sidebar-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.sidebar-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-reset-filters {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--blue-600);
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.375rem;
+  transition: var(--transition-fast);
+}
+
+.btn-reset-filters:hover {
+  background-color: var(--blue-50);
+  color: var(--blue-700);
+}
+
+.btn-close-sidebar {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--slate-500);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.375rem;
+}
+
+.btn-close-sidebar:hover {
+  color: var(--slate-900);
+  background-color: var(--slate-100);
+}
+
+.filter-group {
+  margin-bottom: 1.35rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.filter-group-last {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0.5rem;
+}
+
+.filter-group-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--slate-500);
+  margin-bottom: 0.7rem;
+}
+
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background-color: var(--white);
+  border: 1px solid var(--slate-200);
+  color: var(--slate-700);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.325rem 0.65rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  line-height: 1.2;
+}
+
+.filter-chip:hover {
+  background-color: var(--slate-50);
+  border-color: var(--slate-300);
+  color: var(--slate-900);
+}
+
+.filter-chip.active {
+  background-color: var(--blue-50);
+  border-color: var(--blue-600);
+  color: var(--blue-700);
+  font-weight: 600;
+}
+
+.chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-blue { background-color: var(--blue-600); }
+.dot-purple { background-color: var(--purple-600); }
+.dot-amber { background-color: var(--amber-500); }
+
+/* --------------------------------------------------------------------------
+   Right Main Area: Toolbar & Object Cards
+   -------------------------------------------------------------------------- */
+.explore-main {
+  flex: 1;
+  min-width: 0;
+  padding: 1.75rem 2rem 3rem;
+}
+
+.explore-toolbar {
+  margin-bottom: 1.5rem;
+}
+
+.toolbar-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.toolbar-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.explore-title {
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  letter-spacing: -0.02em;
+}
+
+.result-count-badge {
+  background-color: var(--slate-200);
+  color: var(--slate-700);
+  font-size: 0.825rem;
+  font-weight: 600;
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+}
+
+.toolbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  justify-content: flex-end;
+  min-width: 280px;
+}
+
+.btn-mobile-filter {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--white);
+  border: 1px solid var(--slate-300);
+  color: var(--slate-700);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 0.85rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-mobile-filter:hover {
+  background-color: var(--slate-50);
+  border-color: var(--slate-400);
+}
+
+/* Search Input (HF style) */
+.search-box {
+  position: relative;
+  flex: 1;
+  max-width: 380px;
+  min-width: 180px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--slate-400);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.525rem 2.1rem 0.525rem 2.3rem;
+  background-color: var(--white);
+  border: 1px solid var(--slate-300);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--slate-900);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search-input::placeholder {
+  color: var(--slate-400);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--slate-400);
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-clear:hover {
+  color: var(--slate-700);
+  background-color: var(--slate-100);
+}
+
+/* Sort Dropdown */
+.sort-select {
+  padding: 0.525rem 0.85rem;
+  background-color: var(--white);
+  border: 1px solid var(--slate-300);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--slate-700);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: var(--blue-600);
+}
+
+/* Active Filter Chips Bar */
+.active-filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.active-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--blue-50);
+  border: 1px solid var(--blue-200);
+  color: var(--blue-700);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.active-filter-pill:hover {
+  background-color: var(--blue-100);
+}
+
+.active-filter-pill span.pill-cat {
+  color: var(--slate-500);
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Objects Grid & Hugging Face-Inspired Cards
+   -------------------------------------------------------------------------- */
+.objects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.hf-card {
+  background-color: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 0.75rem;
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.hf-card:hover {
+  border-color: var(--blue-300, #93c5fd);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Card Header: owner / repo-name + Type Badge + Star button */
+.hf-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.hf-card-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.hf-avatar-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  color: var(--white);
+}
+
+.avatar-project { background: linear-gradient(135deg, var(--blue-600), var(--indigo-600)); }
+.avatar-hackathon { background: linear-gradient(135deg, var(--purple-600), #ec4899); }
+.avatar-competition { background: linear-gradient(135deg, var(--amber-500), #ea580c); }
+
+.hf-slug {
+  font-size: 0.975rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hf-owner {
+  color: var(--slate-500);
+  font-weight: 500;
+}
+
+.hf-slash {
+  color: var(--slate-400);
+  margin: 0 0.15rem;
+}
+
+.hf-name {
+  color: var(--slate-900);
+  font-weight: 700;
+  transition: color 0.15s ease;
+}
+
+.hf-card:hover .hf-name {
+  color: var(--blue-600);
+}
+
+.hf-card-right {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.hf-type-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.18rem 0.5rem;
+  border-radius: 0.375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-project {
+  background-color: var(--blue-50);
+  color: var(--blue-700);
+  border: 1px solid var(--blue-200);
+}
+
+.badge-hackathon {
+  background-color: rgba(147, 51, 234, 0.08);
+  color: var(--purple-600);
+  border: 1px solid rgba(147, 51, 234, 0.22);
+}
+
+.badge-competition {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+}
+
+.hf-star-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: 1px solid var(--slate-200);
+  border-radius: 0.375rem;
+  padding: 0.18rem 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--slate-500);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.hf-star-btn:hover {
+  border-color: var(--slate-300);
+  color: var(--slate-800);
+  background-color: var(--slate-50);
+}
+
+.hf-star-btn.starred {
+  color: var(--rose-600);
+  border-color: rgba(225, 29, 72, 0.3);
+  background-color: rgba(225, 29, 72, 0.06);
+}
+
+/* Card Description */
+.hf-card-desc {
+  font-size: 0.875rem;
+  color: var(--slate-600);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card Tags Row */
+.hf-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.hf-tag {
+  font-size: 0.74rem;
+  font-weight: 500;
+  padding: 0.18rem 0.5rem;
+  border-radius: 0.375rem;
+  background-color: var(--slate-100);
+  color: var(--slate-700);
+}
+
+.hf-tag-role {
+  background-color: rgba(5, 150, 105, 0.08);
+  color: var(--emerald-600);
+  font-weight: 600;
+}
+
+/* Card Footer Metadata */
+.hf-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--slate-100);
+  font-size: 0.78rem;
+  color: var(--slate-500);
+}
+
+.hf-meta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.hf-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.hf-rating-pill {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.hf-requested-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--emerald-600);
+  background-color: rgba(5, 150, 105, 0.09);
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+}
+
+/* --------------------------------------------------------------------------
+   Empty State
+   -------------------------------------------------------------------------- */
+.empty-state {
+  background-color: var(--white);
+  border: 1px dashed var(--slate-300);
+  border-radius: 1rem;
+  padding: 4rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--slate-100);
+  color: var(--slate-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
+
+.empty-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.empty-desc {
+  font-size: 0.925rem;
+  color: var(--slate-500);
+  margin-bottom: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Detail Modal Extensions
+   -------------------------------------------------------------------------- */
+.modal-detail-content {
+  max-width: 600px;
+}
+
+.detail-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.detail-owner-slug {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--slate-500);
+}
+
+.detail-body {
+  padding: 1.5rem 1.75rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.detail-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.detail-desc {
+  font-size: 0.975rem;
+  color: var(--slate-600);
+  line-height: 1.65;
+}
+
+.detail-stats-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  background-color: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+@media (min-width: 540px) {
+  .detail-stats-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.detail-stat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.detail-stat-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--slate-400);
+}
+
+.detail-stat-val {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--slate-800);
+}
+
+.detail-rating-val {
+  color: #b45309;
+}
+
+.detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--slate-500);
+}
+
+.detail-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.detail-actions {
+  margin-top: 0.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--slate-100);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints (Mobile Filter Drawer & Grid)
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .filter-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 90;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .filter-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .btn-close-sidebar {
+    display: inline-flex;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(2px);
+    z-index: 80;
+  }
+
+  .btn-mobile-filter {
+    display: inline-flex;
+  }
+
+  .explore-main {
+    padding: 1.5rem 1.25rem 2.5rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .objects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar-controls {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .search-box {
+    max-width: none;
+    order: 3;
+    flex-basis: 100%;
+  }
+}
+

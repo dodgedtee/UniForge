@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Projects &amp; Hackathons — UniForge</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="explore.css">
+</head>
+<body class="explore-body">
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="start.html" class="nav-brand">
+        <div class="brand-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <span class="brand-title">UniForge</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="start.html" class="nav-link">Home</a>
+        <a href="explore.html" class="nav-link nav-link-active">Explore</a>
+        <a href="explore.html?type=project" class="nav-link">Projects</a>
+        <a href="explore.html?type=hackathon" class="nav-link">Hackathons</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn btn-dark btn-nav-cta" id="btn-new-listing">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>New Listing</span>
+        </button>
+
+        <a href="#" class="user-profile" id="user-profile" title="Profile" aria-label="User Profile">
+          <img src="avatar.png" alt="Profile Picture" class="profile-pic" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2394a3b8\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
+        </a>
+
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="close-icon hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="start.html" class="mobile-link">Home</a>
+      <a href="explore.html" class="mobile-link">Explore</a>
+      <a href="explore.html?type=project" class="mobile-link">Projects</a>
+      <a href="explore.html?type=hackathon" class="mobile-link">Hackathons</a>
+      <button class="btn btn-dark mobile-cta-btn" id="mobile-btn-new-listing">
+        + New Listing
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hugging Face Style Explorer Layout -->
+  <div class="explore-wrapper">
+    <div class="explore-layout">
+
+      <!-- Left Sidebar: Filters Panel -->
+      <aside class="filter-sidebar" id="filter-sidebar" aria-label="Filters">
+        <div class="sidebar-header">
+          <div class="sidebar-title-row">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+            </svg>
+            <h2 class="sidebar-title">Filters</h2>
+          </div>
+          <div class="sidebar-header-actions">
+            <button class="btn-reset-filters hidden" id="btn-reset-filters" type="button">Reset</button>
+            <button class="btn-close-sidebar" id="btn-close-sidebar" type="button" aria-label="Close filters">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Group: Category / Type -->
+        <div class="filter-group">
+          <h3 class="filter-group-title">Category</h3>
+          <div class="filter-chips" id="filter-type">
+            <button class="filter-chip active" data-filter="type" data-value="all">All</button>
+            <button class="filter-chip" data-filter="type" data-value="project">
+              <span class="chip-dot dot-blue"></span>Projects
+            </button>
+            <button class="filter-chip" data-filter="type" data-value="hackathon">
+              <span class="chip-dot dot-purple"></span>Hackathons
+            </button>
+            <button class="filter-chip" data-filter="type" data-value="competition">
+              <span class="chip-dot dot-amber"></span>Competitions
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Group: Looking For (Roles / Tasks) -->
+        <div class="filter-group">
+          <h3 class="filter-group-title">Roles Needed</h3>
+          <div class="filter-chips" id="filter-roles">
+            <button class="filter-chip" data-filter="role" data-value="Frontend">Frontend</button>
+            <button class="filter-chip" data-filter="role" data-value="Backend">Backend</button>
+            <button class="filter-chip" data-filter="role" data-value="AI / ML">AI / ML</button>
+            <button class="filter-chip" data-filter="role" data-value="UI/UX">UI/UX</button>
+            <button class="filter-chip" data-filter="role" data-value="Mobile">Mobile</button>
+            <button class="filter-chip" data-filter="role" data-value="Security">Security</button>
+            <button class="filter-chip" data-filter="role" data-value="QA">QA</button>
+            <button class="filter-chip" data-filter="role" data-value="Algorithms">Algorithms</button>
+          </div>
+        </div>
+
+        <!-- Filter Group: Tech Stack (Libraries) -->
+        <div class="filter-group">
+          <h3 class="filter-group-title">Tech Stack</h3>
+          <div class="filter-chips" id="filter-tech">
+            <button class="filter-chip" data-filter="tech" data-value="Python">Python</button>
+            <button class="filter-chip" data-filter="tech" data-value="React">React</button>
+            <button class="filter-chip" data-filter="tech" data-value="FastAPI">FastAPI</button>
+            <button class="filter-chip" data-filter="tech" data-value="LangGraph">LangGraph</button>
+            <button class="filter-chip" data-filter="tech" data-value="Node.js">Node.js</button>
+            <button class="filter-chip" data-filter="tech" data-value="Java">Java</button>
+            <button class="filter-chip" data-filter="tech" data-value="PostgreSQL">PostgreSQL</button>
+            <button class="filter-chip" data-filter="tech" data-value="Docker">Docker</button>
+            <button class="filter-chip" data-filter="tech" data-value="Go">Go</button>
+            <button class="filter-chip" data-filter="tech" data-value="C++">C++</button>
+            <button class="filter-chip" data-filter="tech" data-value="Flutter">Flutter</button>
+          </div>
+        </div>
+
+        <!-- Filter Group: University / Organizer -->
+        <div class="filter-group">
+          <h3 class="filter-group-title">University / Host</h3>
+          <div class="filter-chips" id="filter-uni">
+            <button class="filter-chip" data-filter="uni" data-value="SDU">SDU</button>
+            <button class="filter-chip" data-filter="uni" data-value="KBTU">KBTU</button>
+            <button class="filter-chip" data-filter="uni" data-value="Nazarbayev University">NU</button>
+            <button class="filter-chip" data-filter="uni" data-value="AITU">AITU</button>
+            <button class="filter-chip" data-filter="uni" data-value="Astana Hub">Astana Hub</button>
+          </div>
+        </div>
+
+        <!-- Filter Group: Minimum Leader Rating -->
+        <div class="filter-group filter-group-last">
+          <h3 class="filter-group-title">Leader Rating</h3>
+          <div class="filter-chips" id="filter-rating">
+            <button class="filter-chip active" data-filter="rating" data-value="0">Any Rating</button>
+            <button class="filter-chip" data-filter="rating" data-value="4.5">★ 4.5+</button>
+            <button class="filter-chip" data-filter="rating" data-value="4.8">★ 4.8+</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Mobile Sidebar Backdrop -->
+      <div class="sidebar-backdrop hidden" id="sidebar-backdrop"></div>
+
+      <!-- Right Main Content: Objects Hub -->
+      <main class="explore-main">
+        <!-- Top Toolbar (HF Model Hub style) -->
+        <div class="explore-toolbar">
+          <div class="toolbar-top">
+            <div class="toolbar-heading">
+              <h1 class="explore-title">Projects &amp; Hackathons</h1>
+              <span class="result-count-badge" id="result-count">0</span>
+            </div>
+
+            <div class="toolbar-controls">
+              <button class="btn-mobile-filter" id="btn-mobile-filter" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                <span>Filters</span>
+              </button>
+
+              <div class="search-box">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="search-input" class="search-input" placeholder="Filter by name, stack, or university..." autocomplete="off">
+                <button class="search-clear hidden" id="search-clear" type="button" aria-label="Clear search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="sort-wrapper">
+                <label for="sort-select" class="sr-only">Sort by</label>
+                <select id="sort-select" class="sort-select">
+                  <option value="trending">Sort: Trending</option>
+                  <option value="rating">Sort: Highest Rating</option>
+                  <option value="likes">Sort: Most Starred</option>
+                  <option value="newest">Sort: Recently Updated</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Filters Bar -->
+          <div class="active-filters-bar hidden" id="active-filters-bar"></div>
+        </div>
+
+        <!-- Objects Grid (Hugging Face Model Cards Grid) -->
+        <div class="objects-grid" id="objects-grid">
+          <!-- Populated dynamically by explore.js -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state hidden" id="empty-state">
+          <div class="empty-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <h3 class="empty-title">No matching projects or hackathons</h3>
+          <p class="empty-desc">Try removing some filters or searching with different keywords.</p>
+          <button class="btn btn-secondary" id="btn-empty-reset" type="button">Clear all filters</button>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="brand-icon-small">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <span class="footer-brand-title">UniForge</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="start.html" class="footer-link">Landing Page</a>
+        <a href="explore.html?type=project" class="footer-link">Projects</a>
+        <a href="explore.html?type=hackathon" class="footer-link">Hackathons</a>
+        <a href="explore.html?type=competition" class="footer-link">Competitions</a>
+      </div>
+
+      <div class="footer-copyright">
+        &copy; <span id="current-year">2026</span> UniForge. Built for student innovators.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Object Detail Modal -->
+  <div class="modal-backdrop hidden" id="detail-modal">
+    <div class="modal-content modal-detail-content">
+      <div class="modal-header">
+        <div class="detail-header-meta">
+          <span class="hf-type-badge" id="detail-type-badge">Project</span>
+          <span class="detail-owner-slug" id="detail-slug">sdu-labs / project</span>
+        </div>
+        <button class="modal-close-btn" id="detail-close-btn" aria-label="Close detail modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="detail-body">
+        <h3 class="detail-title" id="detail-title">Title</h3>
+        <p class="detail-desc" id="detail-desc">Description</p>
+
+        <div class="detail-stats-row">
+          <div class="detail-stat-box">
+            <span class="detail-stat-label">Lead / Organizer</span>
+            <span class="detail-stat-val" id="detail-leader">Student Lead</span>
+          </div>
+          <div class="detail-stat-box">
+            <span class="detail-stat-label">Leader Rating</span>
+            <span class="detail-stat-val detail-rating-val" id="detail-rating">★ 4.9</span>
+          </div>
+          <div class="detail-stat-box">
+            <span class="detail-stat-label">University / Host</span>
+            <span class="detail-stat-val" id="detail-uni">SDU</span>
+          </div>
+          <div class="detail-stat-box">
+            <span class="detail-stat-label">Team Status</span>
+            <span class="detail-stat-val" id="detail-team">3 / 5 members</span>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <span class="detail-section-label">Roles Needed</span>
+          <div class="detail-tags-list" id="detail-roles"></div>
+        </div>
+
+        <div class="detail-section">
+          <span class="detail-section-label">Tech Stack</span>
+          <div class="detail-tags-list" id="detail-tech"></div>
+        </div>
+
+        <div class="modal-actions detail-actions">
+          <button type="button" class="btn btn-secondary" id="detail-cancel-btn">Close</button>
+          <button type="button" class="btn btn-primary" id="detail-apply-btn">Request Invitation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create New Listing Modal -->
+  <div class="modal-backdrop hidden" id="create-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Create New Listing</h3>
+        <button class="modal-close-btn" id="create-close-btn" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <form id="create-form" class="modal-form">
+        <div class="form-group">
+          <label for="new-type">Listing Type</label>
+          <select id="new-type" class="form-input" required>
+            <option value="project">Project</option>
+            <option value="hackathon">Hackathon Team</option>
+            <option value="competition">Competitive Programming</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="new-title">Title</label>
+          <input type="text" id="new-title" class="form-input" placeholder="e.g. CampusGPT Study Buddy" required>
+        </div>
+        <div class="form-group">
+          <label for="new-uni">University / Host</label>
+          <input type="text" id="new-uni" class="form-input" placeholder="e.g. SDU, KBTU, Astana Hub" required>
+        </div>
+        <div class="form-group">
+          <label for="new-roles">Roles Needed (comma-separated)</label>
+          <input type="text" id="new-roles" class="form-input" placeholder="e.g. Frontend, Backend, UI/UX" required>
+        </div>
+        <div class="form-group">
+          <label for="new-tech">Tech Stack (comma-separated)</label>
+          <input type="text" id="new-tech" class="form-input" placeholder="e.g. Python, React, FastAPI" required>
+        </div>
+        <div class="form-group">
+          <label for="new-desc">Short Description</label>
+          <textarea id="new-desc" rows="3" class="form-input" placeholder="Describe what you're building or looking for..." required></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="create-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Publish Listing</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript -->
+  <script src="explore.js"></script>
+</body>
+</html>
+
