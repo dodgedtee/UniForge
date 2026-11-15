@@ -167,12 +167,174 @@ const listings = [
     updatedText: "1 week ago",
     updatedDays: 7,
     likes: 39
+  },
+  {
+    id: 11,
+    type: "project",
+    owner: "nu-medai",
+    name: "MedScan-Triage",
+    title: "MedScan Diagnostic Assistant",
+    desc: "Open-source medical imaging triage assistant built by NU bioengineering and CS students using lightweight vision-language pipelines.",
+    roles: ["AI / ML", "Frontend"],
+    tech: ["Python", "FastAPI", "React"],
+    uni: "Nazarbayev University",
+    leader: "Arman Kassymov",
+    teamText: "3 / 5 members",
+    updatedText: "1 week ago",
+    updatedDays: 8,
+    likes: 56
+  },
+  {
+    id: 12,
+    type: "hackathon",
+    owner: "astana-hub",
+    name: "GovTech-AI-Sprint",
+    title: "Astana GovTech & Civic AI Sprint",
+    desc: "36-hour challenge building transparent public-service automation and multilingual Kazakh/Russian document assistants.",
+    roles: ["Backend", "AI / ML", "Security"],
+    tech: ["Python", "Docker", "PostgreSQL"],
+    uni: "Astana Hub",
+    leader: "Astana Hub Org",
+    teamText: "6 teams forming",
+    updatedText: "1 week ago",
+    updatedDays: 9,
+    likes: 63
+  },
+  {
+    id: 13,
+    type: "project",
+    owner: "kbtu-robotics",
+    name: "DronePath-Sim",
+    title: "Autonomous Drone Path Simulator",
+    desc: "3D multi-agent pathfinding and obstacle avoidance simulator for search-and-rescue student robotics competitions.",
+    roles: ["Algorithms", "Backend"],
+    tech: ["C++", "Python", "Docker"],
+    uni: "KBTU",
+    leader: "Ilyas Akhmetov",
+    teamText: "2 / 4 members",
+    updatedText: "2 weeks ago",
+    updatedDays: 10,
+    likes: 44
+  },
+  {
+    id: 14,
+    type: "project",
+    owner: "sdu-mobile",
+    name: "DormSwap-Marketplace",
+    title: "DormSwap Campus Marketplace",
+    desc: "Verified student-only mobile app for buying, selling, and exchanging textbooks, electronics, and dorm essentials on campus.",
+    roles: ["Mobile", "UI/UX", "Backend"],
+    tech: ["Flutter", "Node.js", "PostgreSQL"],
+    uni: "SDU",
+    leader: "Aigerim Tursyn",
+    teamText: "3 / 5 members",
+    updatedText: "2 weeks ago",
+    updatedDays: 11,
+    likes: 35
+  },
+  {
+    id: 15,
+    type: "hackathon",
+    owner: "aitu-gamejam",
+    name: "CentralAsia-GameJam",
+    title: "AITU Interactive Web & Game Jam",
+    desc: "Weekend creative coding jam focused on browser-based multiplayer experiences, WebGL shaders, and collaborative storytelling.",
+    roles: ["Frontend", "UI/UX"],
+    tech: ["React", "Node.js"],
+    uni: "AITU",
+    leader: "AITU DevClub",
+    teamText: "4 teams forming",
+    updatedText: "2 weeks ago",
+    updatedDays: 12,
+    likes: 49
+  },
+  {
+    id: 16,
+    type: "competition",
+    owner: "nu-cp-club",
+    name: "NU-Open-Programming-Cup",
+    title: "NU Open Competitive Programming Cup",
+    desc: "5-hour ICPC-format team contest open to university students across Kazakhstan. Recruiting 3rd member proficient in C++ templates.",
+    roles: ["Algorithms"],
+    tech: ["C++", "Java"],
+    uni: "Nazarbayev University",
+    leader: "Sanzhar Omar",
+    teamText: "2 / 3 members",
+    updatedText: "2 weeks ago",
+    updatedDays: 13,
+    likes: 41
+  },
+  {
+    id: 17,
+    type: "project",
+    owner: "kbtu-cloud",
+    name: "KubeLite-Lab-Runner",
+    title: "KubeLite Student Cloud Runner",
+    desc: "Lightweight container orchestration dashboard allowing student teams to deploy hackathon backends in one click on university servers.",
+    roles: ["Security", "Backend", "QA"],
+    tech: ["Go", "Docker", "PostgreSQL"],
+    uni: "KBTU",
+    leader: "Olzhas Bekturov",
+    teamText: "3 / 4 members",
+    updatedText: "3 weeks ago",
+    updatedDays: 14,
+    likes: 58
+  },
+  {
+    id: 18,
+    type: "hackathon",
+    owner: "sdu-tech",
+    name: "SDU-Startup-Weekend",
+    title: "SDU EdTech Startup Weekend",
+    desc: "Build and pitch a working EdTech MVP in 48 hours with mentorship from alumni founders and venture analysts.",
+    roles: ["Frontend", "Backend", "Mobile", "UI/UX"],
+    tech: ["React", "Flutter", "FastAPI"],
+    uni: "SDU",
+    leader: "SDU Technopark",
+    teamText: "7 teams forming",
+    updatedText: "3 weeks ago",
+    updatedDays: 15,
+    likes: 72
+  },
+  {
+    id: 19,
+    type: "project",
+    owner: "astana-open",
+    name: "KazNLP-Corpus-Builder",
+    title: "KazNLP Open Benchmark & Corpus",
+    desc: "Collaborative open-source tool for cleaning, annotating, and evaluating Kazakh-language instruction datasets for student AI research.",
+    roles: ["AI / ML", "QA"],
+    tech: ["Python", "LangGraph", "PostgreSQL"],
+    uni: "Astana Hub",
+    leader: "Zere Suleimen",
+    teamText: "4 / 6 members",
+    updatedText: "3 weeks ago",
+    updatedDays: 16,
+    likes: 77
+  },
+  {
+    id: 20,
+    type: "competition",
+    owner: "sdu-algo",
+    name: "SDU-Winter-ICPC-Quals",
+    title: "SDU Winter ICPC Qualification Squad",
+    desc: "Structured problem-solving bootcamp covering number theory, flows, and bitmasks ahead of winter university qualifiers.",
+    roles: ["Algorithms"],
+    tech: ["C++", "Python"],
+    uni: "SDU",
+    leader: "Baurzhan Ali",
+    teamText: "2 / 3 members",
+    updatedText: "1 month ago",
+    updatedDays: 18,
+    likes: 28
   }
 ];
 
 // ==========================================================================
 // 2. Application State
 // ==========================================================================
+
+const ITEMS_PER_PAGE = 10;
 
 const state = {
   type: "all",
@@ -181,6 +343,7 @@ const state = {
   uni: new Set(),
   query: "",
   sortBy: "trending",
+  currentPage: 1,
   requestedIds: new Set(),
   activeDetailId: null
 };
@@ -252,6 +415,7 @@ function getFilteredListings() {
 function renderCatalog() {
   const grid = document.getElementById("objects-grid");
   const emptyState = document.getElementById("empty-state");
+  const paginationBar = document.getElementById("pagination-bar");
   if (!grid || !emptyState) return;
 
   const items = getFilteredListings();
@@ -261,17 +425,92 @@ function renderCatalog() {
   if (items.length === 0) {
     grid.innerHTML = "";
     emptyState.classList.remove("hidden");
+    paginationBar?.classList.add("hidden");
     return;
   }
 
   emptyState.classList.add("hidden");
-  grid.innerHTML = items.map(buildCardHTML).join("");
+
+  const totalPages = Math.max(1, Math.ceil(items.length / ITEMS_PER_PAGE));
+  if (state.currentPage > totalPages) state.currentPage = totalPages;
+
+  const startIdx = (state.currentPage - 1) * ITEMS_PER_PAGE;
+  const pageItems = items.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+
+  grid.innerHTML = pageItems.map(buildCardHTML).join("");
 
   // Attach card listeners
   grid.querySelectorAll(".hf-card").forEach(card => {
     card.addEventListener("click", () => {
       const id = Number(card.getAttribute("data-id"));
       openDetailModal(id);
+    });
+  });
+
+  renderPagination(totalPages);
+}
+
+function getPageNumbers(current, total) {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+  const pages = [1];
+  if (current > 3) pages.push("...");
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+  for (let i = start; i <= end; i++) pages.push(i);
+  if (current < total - 2) pages.push("...");
+  pages.push(total);
+  return pages;
+}
+
+function renderPagination(totalPages) {
+  const bar = document.getElementById("pagination-bar");
+  if (!bar) return;
+
+  if (totalPages <= 1) {
+    bar.innerHTML = "";
+    bar.classList.add("hidden");
+    return;
+  }
+
+  bar.classList.remove("hidden");
+  const current = state.currentPage;
+  const pages = getPageNumbers(current, totalPages);
+
+  const pageButtons = pages
+    .map(p => {
+      if (p === "...") {
+        return `<span class="page-ellipsis" aria-hidden="true">…</span>`;
+      }
+      const isActive = p === current;
+      return `<button class="page-btn ${isActive ? "active" : ""}" data-page="${p}" type="button" ${isActive ? 'aria-current="page"' : ""}>${p}</button>`;
+    })
+    .join("");
+
+  bar.innerHTML = `
+    <button class="page-btn" data-page="${current - 1}" type="button" ${current === 1 ? "disabled" : ""}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      <span>Previous</span>
+    </button>
+    ${pageButtons}
+    <button class="page-btn" data-page="${current + 1}" type="button" ${current === totalPages ? "disabled" : ""}>
+      <span>Next</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  `;
+
+  bar.querySelectorAll(".page-btn:not(:disabled)").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetPage = Number(btn.getAttribute("data-page"));
+      if (!targetPage || targetPage === state.currentPage) return;
+      state.currentPage = targetPage;
+      renderCatalog();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 }
@@ -414,6 +653,7 @@ function removeSingleFilter(group, val) {
     if (input) input.value = "";
     clearBtn?.classList.add("hidden");
   }
+  state.currentPage = 1;
   syncSidebarChips();
   renderCatalog();
 }
@@ -424,6 +664,7 @@ function resetAllFilters() {
   state.tech.clear();
   state.uni.clear();
   state.query = "";
+  state.currentPage = 1;
 
   const searchInput = document.getElementById("search-input");
   const searchClear = document.getElementById("search-clear");
@@ -450,6 +691,7 @@ function setupFiltersAndSearch() {
         else targetSet.add(val);
       }
 
+      state.currentPage = 1;
       syncSidebarChips();
       renderCatalog();
     });
@@ -465,6 +707,7 @@ function setupFiltersAndSearch() {
 
   searchInput?.addEventListener("input", e => {
     state.query = e.target.value;
+    state.currentPage = 1;
     searchClear?.classList.toggle("hidden", state.query.length === 0);
     renderCatalog();
   });
@@ -472,6 +715,7 @@ function setupFiltersAndSearch() {
   searchClear?.addEventListener("click", () => {
     if (searchInput) searchInput.value = "";
     state.query = "";
+    state.currentPage = 1;
     searchClear.classList.add("hidden");
     renderCatalog();
   });
@@ -479,6 +723,7 @@ function setupFiltersAndSearch() {
   // Sort select
   document.getElementById("sort-select")?.addEventListener("change", e => {
     state.sortBy = e.target.value;
+    state.currentPage = 1;
     renderCatalog();
   });
 }
@@ -601,6 +846,7 @@ function setupModals() {
     };
 
     listings.unshift(newItem);
+    state.currentPage = 1;
     closeCreate();
     renderCatalog();
     showToast(`Published "${title}" to UniForge Hub!`);
