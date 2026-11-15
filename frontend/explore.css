@@ -242,15 +242,6 @@
   letter-spacing: -0.02em;
 }
 
-.result-count-badge {
-  background-color: var(--slate-200);
-  color: var(--slate-700);
-  font-size: 0.825rem;
-  font-weight: 600;
-  padding: 0.15rem 0.6rem;
-  border-radius: 9999px;
-}
-
 .toolbar-controls {
   display: flex;
   align-items: center;

@@ -251,12 +251,10 @@ function getFilteredListings() {
 
 function renderCatalog() {
   const grid = document.getElementById("objects-grid");
-  const countBadge = document.getElementById("result-count");
   const emptyState = document.getElementById("empty-state");
-  if (!grid || !countBadge || !emptyState) return;
+  if (!grid || !emptyState) return;
 
   const items = getFilteredListings();
-  countBadge.textContent = items.length;
 
   renderActiveFiltersBar();
 
