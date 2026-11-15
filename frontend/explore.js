@@ -192,7 +192,6 @@ const state = {
   minRating: 0,
   query: "",
   sortBy: "trending",
-  starredIds: new Set([1, 5]),
   requestedIds: new Set(),
   activeDetailId: null
 };
@@ -283,28 +282,18 @@ function renderCatalog() {
   emptyState.classList.add("hidden");
   grid.innerHTML = items.map(buildCardHTML).join("");
 
-  // Attach card and star listeners
+  // Attach card listeners
   grid.querySelectorAll(".hf-card").forEach(card => {
     card.addEventListener("click", () => {
       const id = Number(card.getAttribute("data-id"));
       openDetailModal(id);
     });
   });
-
-  grid.querySelectorAll(".hf-star-btn").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      const id = Number(btn.getAttribute("data-id"));
-      toggleStar(id);
-    });
-  });
 }
 
 function buildCardHTML(item) {
   const meta = TYPE_META[item.type] || TYPE_META.project;
-  const isStarred = state.starredIds.has(item.id);
   const isRequested = state.requestedIds.has(item.id);
-  const displayLikes = item.likes + (isStarred ? 1 : 0);
 
   const roleTags = item.roles
     .map(r => `<span class="hf-tag hf-tag-role">${escapeHTML(r)}</span>`)
@@ -329,10 +318,10 @@ function buildCardHTML(item) {
         </div>
         <div class="hf-card-right">
           <span class="hf-type-badge ${meta.badgeClass}">${meta.label}</span>
-          <button class="hf-star-btn ${isStarred ? "starred" : ""}" data-id="${item.id}" type="button" aria-label="Bookmark listing">
-            <span>${isStarred ? "♥" : "♡"}</span>
-            <span>${displayLikes}</span>
-          </button>
+          <span class="hf-likes-badge" aria-label="${item.likes} likes">
+            <span>♥</span>
+            <span>${item.likes}</span>
+          </span>
         </div>
       </div>
 
@@ -464,15 +453,6 @@ function resetAllFilters() {
   searchClear?.classList.add("hidden");
 
   syncSidebarChips();
-  renderCatalog();
-}
-
-function toggleStar(id) {
-  if (state.starredIds.has(id)) {
-    state.starredIds.delete(id);
-  } else {
-    state.starredIds.add(id);
-  }
   renderCatalog();
 }
 
