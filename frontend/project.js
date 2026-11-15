@@ -52,6 +52,9 @@ function renderProjectDetail() {
     getListings,
     getRequestedIds,
     addRequestedId,
+    getLikedIds,
+    toggleLikedId,
+    getLikesCount,
     isTeamListing,
     formatParticipantsLabel,
     escapeHTML
@@ -83,6 +86,30 @@ function renderProjectDetail() {
   const typeBadge = document.getElementById("project-type-badge");
   typeBadge.textContent = meta.label;
   typeBadge.className = `hf-type-badge ${meta.badgeClass}`;
+
+  const likesBtn = document.getElementById("project-likes");
+  const likesCountEl = document.getElementById("project-likes-count");
+
+  if (!isTeam && likesBtn && likesCountEl) {
+    likesBtn.classList.remove("hidden");
+    const syncLikesState = () => {
+      const likedIds = getLikedIds();
+      const isLiked = likedIds.has(item.id);
+      const count = getLikesCount(item, likedIds);
+      likesCountEl.textContent = count;
+      likesBtn.classList.toggle("is-liked", isLiked);
+      likesBtn.setAttribute("aria-pressed", String(isLiked));
+      likesBtn.setAttribute("aria-label", `${count} likes`);
+      likesBtn.title = isLiked ? "Unlike" : "Like";
+    };
+    syncLikesState();
+    likesBtn.addEventListener("click", () => {
+      toggleLikedId(item.id);
+      syncLikesState();
+    });
+  } else {
+    likesBtn?.classList.add("hidden");
+  }
 
   document.getElementById("project-title").textContent = item.title;
   document.getElementById("project-summary").textContent = item.desc;

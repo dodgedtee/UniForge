@@ -77,6 +77,10 @@
   border-radius: 9999px;
 }
 
+.project-likes-display {
+  font-size: 0.875rem;
+}
+
 .project-main-title {
   font-size: 1.85rem;
   font-weight: 800;

@@ -9,8 +9,8 @@ const {
   addCustomListing,
   getRequestedIds,
   getLikedIds,
-  toggleLikedId,
   getLikesCount,
+  isTeamListing,
   formatParticipantsLabel,
   escapeHTML,
   showToast,
@@ -78,15 +78,15 @@ function getFilteredListings() {
 
   // Sort results
   filtered.sort((a, b) => {
-    const likesA = getLikesCount(a, state.likedIds);
-    const likesB = getLikesCount(b, state.likedIds);
+    const likesA = isTeamListing(a) ? 0 : getLikesCount(a, state.likedIds);
+    const likesB = isTeamListing(b) ? 0 : getLikesCount(b, state.likedIds);
     const daysA = a.createdDays ?? a.updatedDays ?? 0;
     const daysB = b.createdDays ?? b.updatedDays ?? 0;
     if (state.sortBy === "likes") return likesB - likesA;
     if (state.sortBy === "newest") return daysA - daysB;
-    // 'trending': weighted mix of likes and recency
-    const scoreA = likesA - daysA * 3;
-    const scoreB = likesB - daysB * 3;
+    // 'trending': weighted mix of likes/activity and recency
+    const scoreA = (getLikesCount(a, state.likedIds)) - daysA * 3;
+    const scoreB = (getLikesCount(b, state.likedIds)) - daysB * 3;
     return scoreB - scoreA;
   });
 
@@ -195,7 +195,6 @@ function renderPagination(totalPages) {
 function buildCardHTML(item) {
   const meta = TYPE_META[item.type] || TYPE_META.project;
   const isRequested = state.requestedIds.has(item.id);
-  const isLiked = state.likedIds.has(item.id);
   const likesCount = getLikesCount(item, state.likedIds);
   const createdText = item.createdText || item.updatedText || "Recently";
 
@@ -211,6 +210,13 @@ function buildCardHTML(item) {
     ? `<span class="hf-requested-pill">✓ Requested</span>`
     : "";
 
+  const likesBadge = isTeamListing(item)
+    ? ""
+    : `<span class="hf-likes-badge" aria-label="${likesCount} likes">
+            <span>♥</span>
+            <span>${likesCount}</span>
+          </span>`;
+
   return `
     <a class="hf-card" href="project.html?id=${item.id}">
       <div class="hf-card-header">
@@ -222,18 +228,7 @@ function buildCardHTML(item) {
         </div>
         <div class="hf-card-right">
           <span class="hf-type-badge ${meta.badgeClass}">${meta.label}</span>
-          <span
-            class="hf-likes-badge hf-likes-btn ${isLiked ? "is-liked" : ""}"
-            role="button"
-            tabindex="0"
-            data-like-id="${item.id}"
-            aria-pressed="${isLiked}"
-            aria-label="${likesCount} likes"
-            title="${isLiked ? "Unlike" : "Like"}"
-          >
-            <span>♥</span>
-            <span>${likesCount}</span>
-          </span>
+          ${likesBadge}
         </div>
       </div>
 
@@ -508,36 +503,9 @@ function setupFilterDrawer() {
   backdrop?.addEventListener("click", () => toggleSidebar(false));
 }
 
-function setupLikeInteractions() {
-  const grid = document.getElementById("objects-grid");
-  if (!grid) return;
-
-  const handleLikeAction = (e, likeEl) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const id = Number(likeEl.getAttribute("data-like-id"));
-    if (!id) return;
-    toggleLikedId(id);
-    state.likedIds = getLikedIds();
-    renderCatalog();
-  };
-
-  grid.addEventListener("click", e => {
-    const likeEl = e.target.closest("[data-like-id]");
-    if (likeEl) handleLikeAction(e, likeEl);
-  });
-
-  grid.addEventListener("keydown", e => {
-    if (e.key !== "Enter" && e.key !== " ") return;
-    const likeEl = e.target.closest("[data-like-id]");
-    if (likeEl) handleLikeAction(e, likeEl);
-  });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   applyInitialUrlFilter();
   setupFiltersAndSearch();
-  setupLikeInteractions();
   setupCreateModal();
   setupMobileNav();
   setupFilterDrawer();
