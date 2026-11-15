@@ -32,7 +32,8 @@ const DEFAULT_LISTINGS = [
     tech: ["Python", "FastAPI", "PostgreSQL", "Docker"],
     uni: "KBTU",
     leader: "KBTU Tech Hub",
-    contributorsCount: 18,
+    teamCurrent: 2,
+    teamMax: 4,
     createdText: "5 hours ago",
     createdDays: 0.2,
     likes: 68
@@ -80,7 +81,8 @@ const DEFAULT_LISTINGS = [
     tech: ["Python", "LangGraph", "FastAPI"],
     uni: "Nazarbayev University",
     leader: "Amina Serikova",
-    contributorsCount: 24,
+    teamCurrent: 3,
+    teamMax: 4,
     createdText: "2 days ago",
     createdDays: 2,
     likes: 84
@@ -112,7 +114,8 @@ const DEFAULT_LISTINGS = [
     tech: ["C++", "Python"],
     uni: "KBTU",
     leader: "Erlan Tolegen",
-    contributorsCount: 6,
+    teamCurrent: 2,
+    teamMax: 3,
     createdText: "4 days ago",
     createdDays: 4,
     likes: 33
@@ -128,7 +131,8 @@ const DEFAULT_LISTINGS = [
     tech: ["React", "Node.js", "Go", "PostgreSQL"],
     uni: "KBTU",
     leader: "Jusan & KBTU",
-    contributorsCount: 15,
+    teamCurrent: 2,
+    teamMax: 4,
     createdText: "5 days ago",
     createdDays: 5,
     likes: 47
@@ -160,7 +164,8 @@ const DEFAULT_LISTINGS = [
     tech: ["C++", "Java"],
     uni: "AITU",
     leader: "Nursultan Zhan",
-    contributorsCount: 19,
+    teamCurrent: 2,
+    teamMax: 3,
     createdText: "1 week ago",
     createdDays: 7,
     likes: 39
@@ -192,7 +197,8 @@ const DEFAULT_LISTINGS = [
     tech: ["Python", "Docker", "PostgreSQL"],
     uni: "AITU",
     leader: "AITU Innovation Lab",
-    contributorsCount: 21,
+    teamCurrent: 3,
+    teamMax: 5,
     createdText: "1 week ago",
     createdDays: 9,
     likes: 63
@@ -240,7 +246,8 @@ const DEFAULT_LISTINGS = [
     tech: ["React", "Node.js"],
     uni: "AITU",
     leader: "AITU DevClub",
-    contributorsCount: 16,
+    teamCurrent: 2,
+    teamMax: 4,
     createdText: "2 weeks ago",
     createdDays: 12,
     likes: 49
@@ -256,7 +263,8 @@ const DEFAULT_LISTINGS = [
     tech: ["C++", "Java"],
     uni: "Nazarbayev University",
     leader: "Sanzhar Omar",
-    contributorsCount: 11,
+    teamCurrent: 2,
+    teamMax: 3,
     createdText: "2 weeks ago",
     createdDays: 13,
     likes: 41
@@ -288,7 +296,8 @@ const DEFAULT_LISTINGS = [
     tech: ["React", "Flutter", "FastAPI"],
     uni: "SDU",
     leader: "SDU Technopark",
-    contributorsCount: 27,
+    teamCurrent: 3,
+    teamMax: 5,
     createdText: "3 weeks ago",
     createdDays: 15,
     likes: 72
@@ -320,7 +329,8 @@ const DEFAULT_LISTINGS = [
     tech: ["C++", "Python"],
     uni: "SDU",
     leader: "Baurzhan Ali",
-    contributorsCount: 8,
+    teamCurrent: 2,
+    teamMax: 3,
     createdText: "1 month ago",
     createdDays: 18,
     likes: 28
@@ -465,11 +475,25 @@ function setupMobileNav() {
   });
 }
 
-function formatContributorsLabel(item, requestedIds = getRequestedIds(), withVerb = false) {
+function isTeamListing(item) {
+  return item?.type === "hackathon" || item?.type === "competition";
+}
+
+function formatParticipantsLabel(item, requestedIds = getRequestedIds(), isCard = false) {
+  const joined = requestedIds.has(item?.id) ? 1 : 0;
+  if (isTeamListing(item)) {
+    const fallback = Number.isFinite(item?.contributorsCount) ? item.contributorsCount : 1;
+    const current = (Number.isFinite(item?.teamCurrent) ? item.teamCurrent : fallback) + joined;
+    if (Number.isFinite(item?.teamMax)) {
+      return isCard ? `${current} / ${item.teamMax} teammates` : `${current} / ${item.teamMax}`;
+    }
+    const noun = current === 1 ? "teammate" : "teammates";
+    return isCard ? `${current} ${noun} needed` : `${current} ${noun}`;
+  }
   const base = Number.isFinite(item?.contributorsCount) ? item.contributorsCount : 1;
-  const count = base + (requestedIds.has(item?.id) ? 1 : 0);
+  const count = base + joined;
   const noun = count === 1 ? "student" : "students";
-  return withVerb ? `${count} ${noun} contributing` : `${count} ${noun}`;
+  return isCard ? `${count} ${noun} contributing` : `${count} ${noun}`;
 }
 
 window.UniForgeData = {
@@ -481,7 +505,8 @@ window.UniForgeData = {
   getLikedIds,
   toggleLikedId,
   getLikesCount,
-  formatContributorsLabel,
+  isTeamListing,
+  formatParticipantsLabel,
   escapeHTML,
   showToast,
   setupFooterYear,

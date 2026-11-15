@@ -82,16 +82,6 @@
               <span class="hf-type-badge" id="project-type-badge">Project</span>
               <span class="status-pill">Active &bull; Recruiting</span>
             </div>
-            <button
-              type="button"
-              class="hf-likes-badge hf-likes-btn project-likes-display"
-              id="project-likes"
-              aria-pressed="false"
-              title="Like"
-            >
-              <span>&#9829;</span>
-              <span id="project-likes-count">0</span>
-            </button>
           </div>
 
           <h1 class="project-main-title" id="project-title">Loading...</h1>
@@ -119,7 +109,7 @@
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
-              <span>Contributing now: <strong id="project-contributors">-</strong></span>
+              <span><span id="project-participants-label">Contributing now:</span> <strong id="project-participants">-</strong></span>
             </div>
             <div class="meta-chip">
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -137,19 +127,17 @@
           <p class="info-paragraph" id="project-overview"></p>
         </section>
 
-        <section class="project-info-card expectations-card">
-          <h2 class="info-section-title">Open Collaboration &amp; Contribution Tracking</h2>
-          <p class="info-paragraph">
-            Anyone motivated to build can contribute to this project — no fixed role or specific stack is required. Send a contribution invite below so the team lead can add you and UniForge can register this project on your profile to count your future contributions and achievements.
-          </p>
+        <section class="project-info-card hidden" id="project-roles-section">
+          <h2 class="info-section-title">Open Roles Needed</h2>
+          <div class="detail-tags-list" id="project-roles"></div>
         </section>
 
-        <!-- Contribute Section at the End -->
+        <!-- Contribute / Join Section at the End -->
         <section class="contribute-card" id="contribute-section">
           <div class="contribute-header">
             <div>
               <h2 class="contribute-title" id="contribute-heading">Ready to Contribute?</h2>
-              <p class="contribute-subtitle">
+              <p class="contribute-subtitle" id="contribute-subtitle">
                 Send an invite request to register your participation and start counting your contributions toward your student achievements.
               </p>
             </div>
@@ -157,8 +145,12 @@
 
           <form class="contribute-form" id="contribute-form">
             <div class="contribute-fields">
+              <div class="form-group hidden" id="contribute-role-group">
+                <label for="contribute-role">Select Role You Want to Fill</label>
+                <select id="contribute-role" class="form-input"></select>
+              </div>
               <div class="form-group">
-                <label for="contribute-note">Short Note / GitHub or Portfolio Link (Optional)</label>
+                <label for="contribute-note" id="contribute-note-label">Short Note / GitHub or Portfolio Link (Optional)</label>
                 <textarea id="contribute-note" rows="3" class="form-input" placeholder="Share how you'd like to help or link your GitHub profile..."></textarea>
               </div>
             </div>

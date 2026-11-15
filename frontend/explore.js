@@ -11,7 +11,7 @@ const {
   getLikedIds,
   toggleLikedId,
   getLikesCount,
-  formatContributorsLabel,
+  formatParticipantsLabel,
   escapeHTML,
   showToast,
   setupFooterYear,
@@ -253,7 +253,7 @@ function buildCardHTML(item) {
             </svg>
             ${escapeHTML(item.uni)}
           </span>
-          <span class="hf-meta-item">• ${escapeHTML(formatContributorsLabel(item, state.requestedIds, true))}</span>
+          <span class="hf-meta-item">• ${escapeHTML(formatParticipantsLabel(item, state.requestedIds, true))}</span>
         </div>
         <div class="hf-meta-group">
           ${requestedBadge}
@@ -463,7 +463,9 @@ function setupCreateModal() {
       tech: techRaw.split(",").map(s => s.trim()).filter(Boolean),
       uni,
       leader: "You (Verified Student)",
-      contributorsCount: 1,
+      ...(type === "project"
+        ? { contributorsCount: 1 }
+        : { teamCurrent: 1, teamMax: type === "competition" ? 3 : 4 }),
       createdText: "Just now",
       createdDays: 0,
       likes: 1

@@ -77,10 +77,6 @@
   border-radius: 9999px;
 }
 
-.project-likes-display {
-  font-size: 0.875rem;
-}
-
 .project-main-title {
   font-size: 1.85rem;
   font-weight: 800;
@@ -153,9 +149,15 @@
   line-height: 1.7;
 }
 
-.expectations-card {
-  background-color: var(--slate-50);
-  border-style: dashed;
+.detail-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.detail-tags-list .hf-tag {
+  font-size: 0.825rem;
+  padding: 0.35rem 0.75rem;
 }
 
 /* --------------------------------------------------------------------------
