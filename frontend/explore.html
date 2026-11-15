@@ -248,57 +248,6 @@
     </div>
   </footer>
 
-  <!-- Object Detail Modal -->
-  <div class="modal-backdrop hidden" id="detail-modal">
-    <div class="modal-content modal-detail-content">
-      <div class="modal-header">
-        <div class="detail-header-meta">
-          <span class="hf-type-badge" id="detail-type-badge">Project</span>
-        </div>
-        <button class="modal-close-btn" id="detail-close-btn" aria-label="Close detail modal">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-      <div class="detail-body">
-        <h3 class="detail-title" id="detail-title">Title</h3>
-        <p class="detail-desc" id="detail-desc">Description</p>
-
-        <div class="detail-stats-row">
-          <div class="detail-stat-box">
-            <span class="detail-stat-label">Lead / Organizer</span>
-            <span class="detail-stat-val" id="detail-leader">Student Lead</span>
-          </div>
-          <div class="detail-stat-box">
-            <span class="detail-stat-label">University / Host</span>
-            <span class="detail-stat-val" id="detail-uni">SDU</span>
-          </div>
-          <div class="detail-stat-box">
-            <span class="detail-stat-label">Team Status</span>
-            <span class="detail-stat-val" id="detail-team">3 / 5 members</span>
-          </div>
-        </div>
-
-        <div class="detail-section">
-          <span class="detail-section-label">Roles Needed</span>
-          <div class="detail-tags-list" id="detail-roles"></div>
-        </div>
-
-        <div class="detail-section">
-          <span class="detail-section-label">Tech Stack</span>
-          <div class="detail-tags-list" id="detail-tech"></div>
-        </div>
-
-        <div class="modal-actions detail-actions">
-          <button type="button" class="btn btn-secondary" id="detail-cancel-btn">Close</button>
-          <button type="button" class="btn btn-primary" id="detail-apply-btn">Request Invitation</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Create New Listing Modal -->
   <div class="modal-backdrop hidden" id="create-modal">
     <div class="modal-content">
@@ -352,6 +301,7 @@
   <div class="toast-container" id="toast-container"></div>
 
   <!-- JavaScript -->
+  <script src="data.js"></script>
   <script src="explore.js"></script>
 </body>
 </html>

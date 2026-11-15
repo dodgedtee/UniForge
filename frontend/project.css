@@ -1,0 +1,232 @@
+/* ==========================================================================
+   UniForge - Project & Hackathon Detail Page Stylesheet
+   ========================================================================== */
+
+.project-page-wrapper {
+  flex: 1;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.project-page-container {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--slate-600);
+  margin-bottom: 1.5rem;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.back-link:hover {
+  color: var(--blue-600);
+}
+
+.back-link:hover svg {
+  transform: translateX(-2px);
+}
+
+.back-link svg {
+  transition: transform 0.15s ease;
+}
+
+.project-detail-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   Header Card
+   -------------------------------------------------------------------------- */
+.project-hero-card {
+  background-color: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.project-hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.project-badges-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--emerald-600);
+  background-color: rgba(5, 150, 105, 0.08);
+  border: 1px solid rgba(5, 150, 105, 0.22);
+  padding: 0.18rem 0.55rem;
+  border-radius: 9999px;
+}
+
+.project-likes-display {
+  font-size: 0.875rem;
+}
+
+.project-main-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .project-main-title {
+    font-size: 2.2rem;
+  }
+}
+
+.project-lead-summary {
+  font-size: 1.05rem;
+  color: var(--slate-600);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.project-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--slate-100);
+}
+
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--slate-500);
+}
+
+.meta-chip svg {
+  color: var(--slate-400);
+  flex-shrink: 0;
+}
+
+.meta-chip strong {
+  color: var(--slate-800);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Information Cards
+   -------------------------------------------------------------------------- */
+.project-info-card {
+  background-color: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: 1rem;
+  padding: 1.75rem 2rem;
+}
+
+.info-section-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  letter-spacing: -0.015em;
+  margin-bottom: 0.875rem;
+}
+
+.info-paragraph {
+  font-size: 0.975rem;
+  color: var(--slate-600);
+  line-height: 1.7;
+}
+
+.expectations-card {
+  background-color: var(--slate-50);
+  border-style: dashed;
+}
+
+/* --------------------------------------------------------------------------
+   Contribute Card (Bottom Action)
+   -------------------------------------------------------------------------- */
+.contribute-card {
+  background-color: var(--white);
+  border: 2px solid var(--blue-200);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  margin-top: 0.5rem;
+}
+
+.contribute-header {
+  margin-bottom: 1.5rem;
+}
+
+.contribute-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.contribute-subtitle {
+  font-size: 0.95rem;
+  color: var(--slate-600);
+}
+
+.contribute-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contribute-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contribute-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--slate-100);
+}
+
+.contribute-status-text {
+  font-size: 0.85rem;
+  color: var(--slate-500);
+}
+
+.contribute-submit-btn {
+  min-width: 180px;
+}
+
+@media (max-width: 640px) {
+  .project-hero-card,
+  .project-info-card,
+  .contribute-card {
+    padding: 1.35rem;
+  }
+
+  .contribute-submit-btn {
+    width: 100%;
+  }
+}
+
