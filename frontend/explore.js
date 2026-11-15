@@ -19,7 +19,6 @@ const listings = [
     tech: ["Python", "LangGraph", "React", "FastAPI"],
     uni: "SDU",
     leader: "Alikhan Saparov",
-    rating: 4.9,
     teamText: "3 / 5 members",
     updatedText: "2 hours ago",
     updatedDays: 0.1,
@@ -36,7 +35,6 @@ const listings = [
     tech: ["Python", "FastAPI", "PostgreSQL", "Docker"],
     uni: "Astana Hub",
     leader: "Astana Hub Org",
-    rating: 4.8,
     teamText: "3 teams forming",
     updatedText: "5 hours ago",
     updatedDays: 0.2,
@@ -53,7 +51,6 @@ const listings = [
     tech: ["Java", "PostgreSQL", "Docker"],
     uni: "KBTU",
     leader: "Dana Bekova",
-    rating: 4.7,
     teamText: "2 / 4 members",
     updatedText: "1 day ago",
     updatedDays: 1,
@@ -70,7 +67,6 @@ const listings = [
     tech: ["Flutter", "Node.js", "PostgreSQL"],
     uni: "Nazarbayev University",
     leader: "Timur Nurlanov",
-    rating: 4.9,
     teamText: "4 / 5 members",
     updatedText: "1 day ago",
     updatedDays: 1.2,
@@ -87,7 +83,6 @@ const listings = [
     tech: ["Python", "LangGraph", "FastAPI"],
     uni: "Nazarbayev University",
     leader: "Amina Serikova",
-    rating: 5.0,
     teamText: "5 teams forming",
     updatedText: "2 days ago",
     updatedDays: 2,
@@ -104,7 +99,6 @@ const listings = [
     tech: ["Docker", "Go", "Python"],
     uni: "AITU",
     leader: "Dias Marat",
-    rating: 4.6,
     teamText: "2 / 4 members",
     updatedText: "3 days ago",
     updatedDays: 3,
@@ -121,7 +115,6 @@ const listings = [
     tech: ["C++", "Python"],
     uni: "KBTU",
     leader: "Erlan Tolegen",
-    rating: 4.9,
     teamText: "2 / 3 members",
     updatedText: "4 days ago",
     updatedDays: 4,
@@ -138,7 +131,6 @@ const listings = [
     tech: ["React", "Node.js", "Go", "PostgreSQL"],
     uni: "KBTU",
     leader: "Jusan & KBTU",
-    rating: 4.5,
     teamText: "2 teams forming",
     updatedText: "5 days ago",
     updatedDays: 5,
@@ -155,7 +147,6 @@ const listings = [
     tech: ["React", "Node.js", "PostgreSQL"],
     uni: "SDU",
     leader: "Madina Karim",
-    rating: 4.4,
     teamText: "3 / 6 members",
     updatedText: "6 days ago",
     updatedDays: 6,
@@ -172,7 +163,6 @@ const listings = [
     tech: ["C++", "Java"],
     uni: "AITU",
     leader: "Nursultan Zhan",
-    rating: 4.8,
     teamText: "4 teams forming",
     updatedText: "1 week ago",
     updatedDays: 7,
@@ -189,7 +179,6 @@ const state = {
   roles: new Set(),
   tech: new Set(),
   uni: new Set(),
-  minRating: 0,
   query: "",
   sortBy: "trending",
   requestedIds: new Set(),
@@ -211,7 +200,6 @@ function getFilteredListings() {
 
   const filtered = listings.filter(item => {
     if (state.type !== "all" && item.type !== state.type) return false;
-    if (item.rating < state.minRating) return false;
 
     if (state.roles.size > 0) {
       const hasRole = item.roles.some(r => state.roles.has(r));
@@ -246,12 +234,11 @@ function getFilteredListings() {
 
   // Sort results
   filtered.sort((a, b) => {
-    if (state.sortBy === "rating") return b.rating - a.rating || b.likes - a.likes;
     if (state.sortBy === "likes") return b.likes - a.likes;
     if (state.sortBy === "newest") return a.updatedDays - b.updatedDays;
-    // 'trending': weighted mix of likes, rating, and recency
-    const scoreA = a.likes + a.rating * 10 - a.updatedDays * 3;
-    const scoreB = b.likes + b.rating * 10 - b.updatedDays * 3;
+    // 'trending': weighted mix of likes and recency
+    const scoreA = a.likes - a.updatedDays * 3;
+    const scoreB = b.likes - b.updatedDays * 3;
     return scoreB - scoreA;
   });
 
@@ -342,7 +329,6 @@ function buildCardHTML(item) {
             ${escapeHTML(item.uni)}
           </span>
           <span class="hf-meta-item">• ${escapeHTML(item.teamText)}</span>
-          <span class="hf-meta-item hf-rating-pill">★ ${item.rating.toFixed(1)}</span>
         </div>
         <div class="hf-meta-group">
           ${requestedBadge}
@@ -366,9 +352,6 @@ function renderActiveFiltersBar() {
   state.roles.forEach(val => pills.push({ group: "role", value: val, label: `Role: ${val}` }));
   state.tech.forEach(val => pills.push({ group: "tech", value: val, label: `Tech: ${val}` }));
   state.uni.forEach(val => pills.push({ group: "uni", value: val, label: `Uni: ${val}` }));
-  if (state.minRating > 0) {
-    pills.push({ group: "rating", value: String(state.minRating), label: `Rating: ★ ${state.minRating}+` });
-  }
   if (state.query.trim()) {
     pills.push({ group: "query", value: state.query, label: `Search: "${state.query.trim()}"` });
   }
@@ -416,7 +399,6 @@ function syncSidebarChips() {
     else if (group === "role") isActive = state.roles.has(val);
     else if (group === "tech") isActive = state.tech.has(val);
     else if (group === "uni") isActive = state.uni.has(val);
-    else if (group === "rating") isActive = state.minRating === Number(val);
 
     chip.classList.toggle("active", isActive);
   });
@@ -427,7 +409,6 @@ function removeSingleFilter(group, val) {
   else if (group === "role") state.roles.delete(val);
   else if (group === "tech") state.tech.delete(val);
   else if (group === "uni") state.uni.delete(val);
-  else if (group === "rating") state.minRating = 0;
   else if (group === "query") {
     state.query = "";
     const input = document.getElementById("search-input");
@@ -444,7 +425,6 @@ function resetAllFilters() {
   state.roles.clear();
   state.tech.clear();
   state.uni.clear();
-  state.minRating = 0;
   state.query = "";
 
   const searchInput = document.getElementById("search-input");
@@ -465,8 +445,6 @@ function setupFiltersAndSearch() {
 
       if (group === "type") {
         state.type = val;
-      } else if (group === "rating") {
-        state.minRating = Number(val);
       } else {
         const targetSet =
           group === "role" ? state.roles : group === "tech" ? state.tech : state.uni;
@@ -536,7 +514,6 @@ function openDetailModal(id) {
   document.getElementById("detail-title").textContent = item.title;
   document.getElementById("detail-desc").textContent = item.desc;
   document.getElementById("detail-leader").textContent = item.leader;
-  document.getElementById("detail-rating").textContent = `★ ${item.rating.toFixed(1)}`;
   document.getElementById("detail-uni").textContent = item.uni;
   document.getElementById("detail-team").textContent = item.teamText;
 
@@ -619,7 +596,6 @@ function setupModals() {
       tech: techRaw.split(",").map(s => s.trim()).filter(Boolean),
       uni,
       leader: "You (Verified Student)",
-      rating: 5.0,
       teamText: type === "project" ? "1 / 4 members" : "1 team forming",
       updatedText: "Just now",
       updatedDays: 0,

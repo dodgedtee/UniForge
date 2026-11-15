@@ -138,7 +138,7 @@
         </div>
 
         <!-- Filter Group: University / Organizer -->
-        <div class="filter-group">
+        <div class="filter-group filter-group-last">
           <h3 class="filter-group-title">University / Host</h3>
           <div class="filter-chips" id="filter-uni">
             <button class="filter-chip" data-filter="uni" data-value="SDU">SDU</button>
@@ -146,16 +146,6 @@
             <button class="filter-chip" data-filter="uni" data-value="Nazarbayev University">NU</button>
             <button class="filter-chip" data-filter="uni" data-value="AITU">AITU</button>
             <button class="filter-chip" data-filter="uni" data-value="Astana Hub">Astana Hub</button>
-          </div>
-        </div>
-
-        <!-- Filter Group: Minimum Leader Rating -->
-        <div class="filter-group filter-group-last">
-          <h3 class="filter-group-title">Leader Rating</h3>
-          <div class="filter-chips" id="filter-rating">
-            <button class="filter-chip active" data-filter="rating" data-value="0">Any Rating</button>
-            <button class="filter-chip" data-filter="rating" data-value="4.5">★ 4.5+</button>
-            <button class="filter-chip" data-filter="rating" data-value="4.8">★ 4.8+</button>
           </div>
         </div>
       </aside>
@@ -199,8 +189,7 @@
                 <label for="sort-select" class="sr-only">Sort by</label>
                 <select id="sort-select" class="sort-select">
                   <option value="trending">Sort: Trending</option>
-                  <option value="rating">Sort: Highest Rating</option>
-                  <option value="likes">Sort: Most Starred</option>
+                  <option value="likes">Sort: Most Liked</option>
                   <option value="newest">Sort: Recently Updated</option>
                 </select>
               </div>
@@ -281,10 +270,6 @@
           <div class="detail-stat-box">
             <span class="detail-stat-label">Lead / Organizer</span>
             <span class="detail-stat-val" id="detail-leader">Student Lead</span>
-          </div>
-          <div class="detail-stat-box">
-            <span class="detail-stat-label">Leader Rating</span>
-            <span class="detail-stat-val detail-rating-val" id="detail-rating">★ 4.9</span>
           </div>
           <div class="detail-stat-box">
             <span class="detail-stat-label">University / Host</span>
