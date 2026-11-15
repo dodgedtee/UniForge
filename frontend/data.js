@@ -17,8 +17,8 @@ const DEFAULT_LISTINGS = [
     uni: "SDU",
     leader: "Alikhan Saparov",
     contributorsCount: 12,
-    updatedText: "2 hours ago",
-    updatedDays: 0.1,
+    createdText: "2 hours ago",
+    createdDays: 0.1,
     likes: 42
   },
   {
@@ -33,8 +33,8 @@ const DEFAULT_LISTINGS = [
     uni: "KBTU",
     leader: "KBTU Tech Hub",
     contributorsCount: 18,
-    updatedText: "5 hours ago",
-    updatedDays: 0.2,
+    createdText: "5 hours ago",
+    createdDays: 0.2,
     likes: 68
   },
   {
@@ -49,8 +49,8 @@ const DEFAULT_LISTINGS = [
     uni: "KBTU",
     leader: "Dana Bekova",
     contributorsCount: 7,
-    updatedText: "1 day ago",
-    updatedDays: 1,
+    createdText: "1 day ago",
+    createdDays: 1,
     likes: 29
   },
   {
@@ -65,8 +65,8 @@ const DEFAULT_LISTINGS = [
     uni: "Nazarbayev University",
     leader: "Timur Nurlanov",
     contributorsCount: 14,
-    updatedText: "1 day ago",
-    updatedDays: 1.2,
+    createdText: "1 day ago",
+    createdDays: 1.2,
     likes: 51
   },
   {
@@ -81,8 +81,8 @@ const DEFAULT_LISTINGS = [
     uni: "Nazarbayev University",
     leader: "Amina Serikova",
     contributorsCount: 24,
-    updatedText: "2 days ago",
-    updatedDays: 2,
+    createdText: "2 days ago",
+    createdDays: 2,
     likes: 84
   },
   {
@@ -97,8 +97,8 @@ const DEFAULT_LISTINGS = [
     uni: "AITU",
     leader: "Dias Marat",
     contributorsCount: 9,
-    updatedText: "3 days ago",
-    updatedDays: 3,
+    createdText: "3 days ago",
+    createdDays: 3,
     likes: 37
   },
   {
@@ -113,8 +113,8 @@ const DEFAULT_LISTINGS = [
     uni: "KBTU",
     leader: "Erlan Tolegen",
     contributorsCount: 6,
-    updatedText: "4 days ago",
-    updatedDays: 4,
+    createdText: "4 days ago",
+    createdDays: 4,
     likes: 33
   },
   {
@@ -129,8 +129,8 @@ const DEFAULT_LISTINGS = [
     uni: "KBTU",
     leader: "Jusan & KBTU",
     contributorsCount: 15,
-    updatedText: "5 days ago",
-    updatedDays: 5,
+    createdText: "5 days ago",
+    createdDays: 5,
     likes: 47
   },
   {
@@ -145,8 +145,8 @@ const DEFAULT_LISTINGS = [
     uni: "SDU",
     leader: "Madina Karim",
     contributorsCount: 8,
-    updatedText: "6 days ago",
-    updatedDays: 6,
+    createdText: "6 days ago",
+    createdDays: 6,
     likes: 21
   },
   {
@@ -161,8 +161,8 @@ const DEFAULT_LISTINGS = [
     uni: "AITU",
     leader: "Nursultan Zhan",
     contributorsCount: 19,
-    updatedText: "1 week ago",
-    updatedDays: 7,
+    createdText: "1 week ago",
+    createdDays: 7,
     likes: 39
   },
   {
@@ -177,8 +177,8 @@ const DEFAULT_LISTINGS = [
     uni: "Nazarbayev University",
     leader: "Arman Kassymov",
     contributorsCount: 11,
-    updatedText: "1 week ago",
-    updatedDays: 8,
+    createdText: "1 week ago",
+    createdDays: 8,
     likes: 56
   },
   {
@@ -193,8 +193,8 @@ const DEFAULT_LISTINGS = [
     uni: "AITU",
     leader: "AITU Innovation Lab",
     contributorsCount: 21,
-    updatedText: "1 week ago",
-    updatedDays: 9,
+    createdText: "1 week ago",
+    createdDays: 9,
     likes: 63
   },
   {
@@ -209,8 +209,8 @@ const DEFAULT_LISTINGS = [
     uni: "KBTU",
     leader: "Ilyas Akhmetov",
     contributorsCount: 10,
-    updatedText: "2 weeks ago",
-    updatedDays: 10,
+    createdText: "2 weeks ago",
+    createdDays: 10,
     likes: 44
   },
   {
@@ -225,8 +225,8 @@ const DEFAULT_LISTINGS = [
     uni: "SDU",
     leader: "Aigerim Tursyn",
     contributorsCount: 13,
-    updatedText: "2 weeks ago",
-    updatedDays: 11,
+    createdText: "2 weeks ago",
+    createdDays: 11,
     likes: 35
   },
   {
@@ -241,8 +241,8 @@ const DEFAULT_LISTINGS = [
     uni: "AITU",
     leader: "AITU DevClub",
     contributorsCount: 16,
-    updatedText: "2 weeks ago",
-    updatedDays: 12,
+    createdText: "2 weeks ago",
+    createdDays: 12,
     likes: 49
   },
   {
@@ -257,8 +257,8 @@ const DEFAULT_LISTINGS = [
     uni: "Nazarbayev University",
     leader: "Sanzhar Omar",
     contributorsCount: 11,
-    updatedText: "2 weeks ago",
-    updatedDays: 13,
+    createdText: "2 weeks ago",
+    createdDays: 13,
     likes: 41
   },
   {
@@ -273,8 +273,8 @@ const DEFAULT_LISTINGS = [
     uni: "KBTU",
     leader: "Olzhas Bekturov",
     contributorsCount: 9,
-    updatedText: "3 weeks ago",
-    updatedDays: 14,
+    createdText: "3 weeks ago",
+    createdDays: 14,
     likes: 58
   },
   {
@@ -289,8 +289,8 @@ const DEFAULT_LISTINGS = [
     uni: "SDU",
     leader: "SDU Technopark",
     contributorsCount: 27,
-    updatedText: "3 weeks ago",
-    updatedDays: 15,
+    createdText: "3 weeks ago",
+    createdDays: 15,
     likes: 72
   },
   {
@@ -305,8 +305,8 @@ const DEFAULT_LISTINGS = [
     uni: "Nazarbayev University",
     leader: "Zere Suleimen",
     contributorsCount: 17,
-    updatedText: "3 weeks ago",
-    updatedDays: 16,
+    createdText: "3 weeks ago",
+    createdDays: 16,
     likes: 77
   },
   {
@@ -321,8 +321,8 @@ const DEFAULT_LISTINGS = [
     uni: "SDU",
     leader: "Baurzhan Ali",
     contributorsCount: 8,
-    updatedText: "1 month ago",
-    updatedDays: 18,
+    createdText: "1 month ago",
+    createdDays: 18,
     likes: 28
   }
 ];
@@ -335,7 +335,8 @@ const TYPE_META = {
 
 const STORAGE_KEYS = {
   CUSTOM_LISTINGS: "uniforge_custom_listings",
-  REQUESTED_IDS: "uniforge_requested_ids"
+  REQUESTED_IDS: "uniforge_requested_ids",
+  LIKED_IDS: "uniforge_liked_ids"
 };
 
 function readStorageJSON(key, fallback) {
@@ -366,12 +367,12 @@ function addCustomListing(item) {
   writeStorageJSON(STORAGE_KEYS.CUSTOM_LISTINGS, custom);
 }
 
-function getRequestedIds() {
-  return new Set(readStorageJSON(STORAGE_KEYS.REQUESTED_IDS, []));
+function readStoredIdSet(storageKey) {
+  return new Set(readStorageJSON(storageKey, []));
 }
 
-function toggleRequestedId(id) {
-  const set = getRequestedIds();
+function toggleStoredId(storageKey, id) {
+  const set = readStoredIdSet(storageKey);
   let added = false;
   if (set.has(id)) {
     set.delete(id);
@@ -379,8 +380,33 @@ function toggleRequestedId(id) {
     set.add(id);
     added = true;
   }
-  writeStorageJSON(STORAGE_KEYS.REQUESTED_IDS, Array.from(set));
+  writeStorageJSON(storageKey, Array.from(set));
   return added;
+}
+
+function getRequestedIds() {
+  return readStoredIdSet(STORAGE_KEYS.REQUESTED_IDS);
+}
+
+function addRequestedId(id) {
+  const set = readStoredIdSet(STORAGE_KEYS.REQUESTED_IDS);
+  if (set.has(id)) return false;
+  set.add(id);
+  writeStorageJSON(STORAGE_KEYS.REQUESTED_IDS, Array.from(set));
+  return true;
+}
+
+function getLikedIds() {
+  return readStoredIdSet(STORAGE_KEYS.LIKED_IDS);
+}
+
+function toggleLikedId(id) {
+  return toggleStoredId(STORAGE_KEYS.LIKED_IDS, id);
+}
+
+function getLikesCount(item, likedIds = getLikedIds()) {
+  const base = Number.isFinite(item?.likes) ? item.likes : 0;
+  return base + (likedIds.has(item?.id) ? 1 : 0);
 }
 
 function escapeHTML(str) {
@@ -451,7 +477,10 @@ window.UniForgeData = {
   getListings,
   addCustomListing,
   getRequestedIds,
-  toggleRequestedId,
+  addRequestedId,
+  getLikedIds,
+  toggleLikedId,
+  getLikesCount,
   formatContributorsLabel,
   escapeHTML,
   showToast,

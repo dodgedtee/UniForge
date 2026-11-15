@@ -82,10 +82,16 @@
               <span class="hf-type-badge" id="project-type-badge">Project</span>
               <span class="status-pill">Active &bull; Recruiting</span>
             </div>
-            <span class="hf-likes-badge project-likes-display" id="project-likes">
+            <button
+              type="button"
+              class="hf-likes-badge hf-likes-btn project-likes-display"
+              id="project-likes"
+              aria-pressed="false"
+              title="Like"
+            >
               <span>&#9829;</span>
               <span id="project-likes-count">0</span>
-            </span>
+            </button>
           </div>
 
           <h1 class="project-main-title" id="project-title">Loading...</h1>
@@ -120,7 +126,7 @@
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              <span>Updated <strong id="project-updated">-</strong></span>
+              <span>Created <strong id="project-created">-</strong></span>
             </div>
           </div>
         </header>

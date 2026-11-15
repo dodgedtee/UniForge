@@ -20,9 +20,11 @@ function renderProjectDetail() {
     TYPE_META,
     getListings,
     getRequestedIds,
-    toggleRequestedId,
-    formatContributorsLabel,
-    showToast
+    addRequestedId,
+    getLikedIds,
+    toggleLikedId,
+    getLikesCount,
+    formatContributorsLabel
   } = window.UniForgeData;
 
   const params = new URLSearchParams(window.location.search);
@@ -49,12 +51,32 @@ function renderProjectDetail() {
   typeBadge.textContent = meta.label;
   typeBadge.className = `hf-type-badge ${meta.badgeClass}`;
 
-  document.getElementById("project-likes-count").textContent = item.likes;
+  const likesBtn = document.getElementById("project-likes");
+  const likesCountEl = document.getElementById("project-likes-count");
+
+  function syncLikesState() {
+    const likedIds = getLikedIds();
+    const isLiked = likedIds.has(item.id);
+    const count = getLikesCount(item, likedIds);
+    likesCountEl.textContent = count;
+    likesBtn.classList.toggle("is-liked", isLiked);
+    likesBtn.setAttribute("aria-pressed", String(isLiked));
+    likesBtn.setAttribute("aria-label", `${count} likes`);
+    likesBtn.title = isLiked ? "Unlike" : "Like";
+  }
+
+  syncLikesState();
+  likesBtn?.addEventListener("click", () => {
+    toggleLikedId(item.id);
+    syncLikesState();
+  });
+
   document.getElementById("project-title").textContent = item.title;
   document.getElementById("project-summary").textContent = item.desc;
   document.getElementById("project-uni").textContent = item.uni;
   document.getElementById("project-leader").textContent = item.leader;
-  document.getElementById("project-updated").textContent = item.updatedText;
+  document.getElementById("project-created").textContent =
+    item.createdText || item.updatedText || "Recently";
 
   document.getElementById("about-heading").textContent =
     ABOUT_LABELS[item.type] || ABOUT_LABELS.project;
@@ -79,7 +101,8 @@ function renderProjectDetail() {
       contributeBtn.innerHTML = `<span>&#10003; Contribution Invite Sent</span>`;
       contributeBtn.classList.remove("btn-primary");
       contributeBtn.classList.add("btn-secondary");
-      statusText.textContent = `Invite sent to ${item.leader} • Registered for contribution achievements. Click to withdraw.`;
+      contributeBtn.disabled = true;
+      statusText.textContent = `Invite sent to ${item.leader} • Registered for your future contribution achievements.`;
       noteInput.disabled = true;
     } else {
       contributeBtn.innerHTML = `
@@ -91,6 +114,7 @@ function renderProjectDetail() {
       `;
       contributeBtn.classList.remove("btn-secondary");
       contributeBtn.classList.add("btn-primary");
+      contributeBtn.disabled = false;
       statusText.textContent = "Verified students • Registers project for future contribution achievements";
       noteInput.disabled = false;
     }
@@ -100,12 +124,8 @@ function renderProjectDetail() {
 
   contributeForm?.addEventListener("submit", e => {
     e.preventDefault();
-    const added = toggleRequestedId(item.id);
-    if (added) {
-      showToast(`Invite sent to ${item.leader}! Project registered to count your future contributions.`);
-    } else {
-      showToast(`Withdrew contribution invite for "${item.title}".`);
-    }
+    if (getRequestedIds().has(item.id)) return;
+    addRequestedId(item.id);
     syncContributeState();
   });
 }

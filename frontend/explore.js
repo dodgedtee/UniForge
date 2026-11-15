@@ -8,6 +8,9 @@ const {
   getListings,
   addCustomListing,
   getRequestedIds,
+  getLikedIds,
+  toggleLikedId,
+  getLikesCount,
   formatContributorsLabel,
   escapeHTML,
   showToast,
@@ -30,7 +33,8 @@ const state = {
   query: "",
   sortBy: "trending",
   currentPage: 1,
-  requestedIds: getRequestedIds()
+  requestedIds: getRequestedIds(),
+  likedIds: getLikedIds()
 };
 
 // ==========================================================================
@@ -74,11 +78,15 @@ function getFilteredListings() {
 
   // Sort results
   filtered.sort((a, b) => {
-    if (state.sortBy === "likes") return b.likes - a.likes;
-    if (state.sortBy === "newest") return a.updatedDays - b.updatedDays;
+    const likesA = getLikesCount(a, state.likedIds);
+    const likesB = getLikesCount(b, state.likedIds);
+    const daysA = a.createdDays ?? a.updatedDays ?? 0;
+    const daysB = b.createdDays ?? b.updatedDays ?? 0;
+    if (state.sortBy === "likes") return likesB - likesA;
+    if (state.sortBy === "newest") return daysA - daysB;
     // 'trending': weighted mix of likes and recency
-    const scoreA = a.likes - a.updatedDays * 3;
-    const scoreB = b.likes - b.updatedDays * 3;
+    const scoreA = likesA - daysA * 3;
+    const scoreB = likesB - daysB * 3;
     return scoreB - scoreA;
   });
 
@@ -187,6 +195,9 @@ function renderPagination(totalPages) {
 function buildCardHTML(item) {
   const meta = TYPE_META[item.type] || TYPE_META.project;
   const isRequested = state.requestedIds.has(item.id);
+  const isLiked = state.likedIds.has(item.id);
+  const likesCount = getLikesCount(item, state.likedIds);
+  const createdText = item.createdText || item.updatedText || "Recently";
 
   const roleTags = item.roles
     .map(r => `<span class="hf-tag hf-tag-role">${escapeHTML(r)}</span>`)
@@ -211,9 +222,17 @@ function buildCardHTML(item) {
         </div>
         <div class="hf-card-right">
           <span class="hf-type-badge ${meta.badgeClass}">${meta.label}</span>
-          <span class="hf-likes-badge" aria-label="${item.likes} likes">
+          <span
+            class="hf-likes-badge hf-likes-btn ${isLiked ? "is-liked" : ""}"
+            role="button"
+            tabindex="0"
+            data-like-id="${item.id}"
+            aria-pressed="${isLiked}"
+            aria-label="${likesCount} likes"
+            title="${isLiked ? "Unlike" : "Like"}"
+          >
             <span>♥</span>
-            <span>${item.likes}</span>
+            <span>${likesCount}</span>
           </span>
         </div>
       </div>
@@ -238,7 +257,7 @@ function buildCardHTML(item) {
         </div>
         <div class="hf-meta-group">
           ${requestedBadge}
-          <span>${escapeHTML(item.updatedText)}</span>
+          <span>Created ${escapeHTML(createdText)}</span>
         </div>
       </div>
     </a>
@@ -445,8 +464,8 @@ function setupCreateModal() {
       uni,
       leader: "You (Verified Student)",
       contributorsCount: 1,
-      updatedText: "Just now",
-      updatedDays: 0,
+      createdText: "Just now",
+      createdDays: 0,
       likes: 1
     };
 
@@ -487,9 +506,36 @@ function setupFilterDrawer() {
   backdrop?.addEventListener("click", () => toggleSidebar(false));
 }
 
+function setupLikeInteractions() {
+  const grid = document.getElementById("objects-grid");
+  if (!grid) return;
+
+  const handleLikeAction = (e, likeEl) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = Number(likeEl.getAttribute("data-like-id"));
+    if (!id) return;
+    toggleLikedId(id);
+    state.likedIds = getLikedIds();
+    renderCatalog();
+  };
+
+  grid.addEventListener("click", e => {
+    const likeEl = e.target.closest("[data-like-id]");
+    if (likeEl) handleLikeAction(e, likeEl);
+  });
+
+  grid.addEventListener("keydown", e => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const likeEl = e.target.closest("[data-like-id]");
+    if (likeEl) handleLikeAction(e, likeEl);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   applyInitialUrlFilter();
   setupFiltersAndSearch();
+  setupLikeInteractions();
   setupCreateModal();
   setupMobileNav();
   setupFilterDrawer();
@@ -500,6 +546,7 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("pageshow", () => {
   listings = getListings();
   state.requestedIds = getRequestedIds();
+  state.likedIds = getLikedIds();
   renderCatalog();
 });
 

@@ -503,7 +503,41 @@
   gap: 0.25rem;
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--rose-600);
+  color: var(--slate-500);
+}
+
+.hf-likes-btn {
+  background-color: var(--white);
+  border: 1px solid var(--slate-200);
+  color: var(--slate-500);
+  padding: 0.18rem 0.45rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.hf-likes-btn:hover {
+  background-color: var(--slate-50);
+  border-color: var(--slate-300);
+  color: var(--slate-700);
+}
+
+.hf-likes-btn:focus-visible {
+  outline: 2px solid var(--slate-400);
+  outline-offset: 2px;
+}
+
+.hf-likes-btn.is-liked {
+  color: #dc2626;
+  background-color: rgba(225, 29, 72, 0.08);
+  border-color: rgba(225, 29, 72, 0.28);
+}
+
+.hf-likes-btn.is-liked:hover {
+  color: #dc2626;
+  background-color: rgba(225, 29, 72, 0.14);
+  border-color: rgba(225, 29, 72, 0.38);
 }
 
 /* Card Description */

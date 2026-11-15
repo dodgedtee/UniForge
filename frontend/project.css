@@ -218,6 +218,12 @@
   min-width: 180px;
 }
 
+.contribute-submit-btn:disabled {
+  cursor: default;
+  opacity: 0.9;
+  transform: none;
+}
+
 @media (max-width: 640px) {
   .project-hero-card,
   .project-info-card,
