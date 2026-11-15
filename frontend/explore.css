@@ -453,16 +453,6 @@
   text-overflow: ellipsis;
 }
 
-.hf-owner {
-  color: var(--slate-500);
-  font-weight: 500;
-}
-
-.hf-slash {
-  color: var(--slate-400);
-  margin: 0 0.15rem;
-}
-
 .hf-name {
   color: var(--slate-900);
   font-weight: 700;
@@ -696,12 +686,6 @@
   display: flex;
   align-items: center;
   gap: 0.625rem;
-}
-
-.detail-owner-slug {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--slate-500);
 }
 
 .detail-body {

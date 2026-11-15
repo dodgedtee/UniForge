@@ -11,8 +11,6 @@ const listings = [
   {
     id: 1,
     type: "project",
-    owner: "sdu-labs",
-    name: "NarrAI-Storyteller",
     title: "NarrAI - Multi-Agent Storyteller",
     desc: "Experimental platform where multiple LLM agents collaborate to write interactive, branching storylines in real-time with user steering.",
     roles: ["Frontend", "AI / ML"],
@@ -27,14 +25,12 @@ const listings = [
   {
     id: 2,
     type: "hackathon",
-    owner: "astana-hub",
-    name: "Almaty-Incubation-Jam",
-    title: "Almaty Hub Incubation Hackathon",
+    title: "Almaty Student Incubation Hackathon",
     desc: "48-hour flagship hackathon building scalable civic-tech and AI startups. Multiple university student teams currently recruiting backend & ML builders.",
     roles: ["Backend", "AI / ML", "UI/UX"],
     tech: ["Python", "FastAPI", "PostgreSQL", "Docker"],
-    uni: "Astana Hub",
-    leader: "Astana Hub Org",
+    uni: "KBTU",
+    leader: "KBTU Tech Hub",
     teamText: "3 teams forming",
     updatedText: "5 hours ago",
     updatedDays: 0.2,
@@ -43,8 +39,6 @@ const listings = [
   {
     id: 3,
     type: "project",
-    owner: "kbtu-fintech",
-    name: "FinTrack-Student-API",
     title: "FinTrack Student Club API",
     desc: "High-performance financial tracking and transparent budget ledger API designed for university student clubs and event treasurers.",
     roles: ["QA", "Backend"],
@@ -59,8 +53,6 @@ const listings = [
   {
     id: 4,
     type: "project",
-    owner: "nu-green-tech",
-    name: "EcoCampus-Insights",
     title: "EcoCampus Insights Mobile",
     desc: "Cross-platform mobile app tracking campus energy usage and incentivizing sustainable student habits through gamified challenges.",
     roles: ["Mobile", "UI/UX", "Backend"],
@@ -75,8 +67,6 @@ const listings = [
   {
     id: 5,
     type: "hackathon",
-    owner: "cair-research",
-    name: "CAIR-AI-Selection-2026",
     title: "CAIR Selection AI Competition",
     desc: "Applied NLP and LLM optimization challenge hosted by Center for AI Research. Looking for strong Python & prompt-engineering teammates.",
     roles: ["AI / ML", "Backend"],
@@ -91,8 +81,6 @@ const listings = [
   {
     id: 6,
     type: "project",
-    owner: "aitu-sec",
-    name: "CyberDefense-Sandbox",
     title: "CyberDefense Red-Team Sandbox",
     desc: "Isolated containerized virtual labs for university students to practice network defense, CTF challenges, and penetration testing safely.",
     roles: ["Security", "Backend"],
@@ -107,8 +95,6 @@ const listings = [
   {
     id: 7,
     type: "competition",
-    owner: "icpc-kz-prep",
-    name: "ICPC-Regional-Squad-B",
     title: "ICPC Regional Training Squad",
     desc: "Weekly dynamic programming, graph theory, and Div.1 Codeforces virtual contests preparing a 3-student team for upcoming regionals.",
     roles: ["Algorithms"],
@@ -123,8 +109,6 @@ const listings = [
   {
     id: 8,
     type: "hackathon",
-    owner: "kbtu-jusan",
-    name: "FinTech-Innovators-Jam",
     title: "FinTech Innovators Jam",
     desc: "Build next-gen micro-investing and student payment tools in 36 hours. Mentorship from senior banking engineers and cash prizes.",
     roles: ["Frontend", "Backend", "UI/UX"],
@@ -139,8 +123,6 @@ const listings = [
   {
     id: 9,
     type: "project",
-    owner: "sdu-edu",
-    name: "StudySync-Peer-Notes",
     title: "StudySync Collaborative Notes",
     desc: "Real-time markdown workspace with AI flashcard generation and shared course roadmaps built by SDU sophomore students.",
     roles: ["Frontend", "UI/UX", "QA"],
@@ -155,8 +137,6 @@ const listings = [
   {
     id: 10,
     type: "competition",
-    owner: "aitu-algo",
-    name: "AITU-CodeCup-2026",
     title: "AITU Algorithmic CodeCup",
     desc: "Inter-university team competitive programming sprint focusing on greedy algorithms, segment trees, and speed problem solving.",
     roles: ["Algorithms"],
@@ -171,8 +151,6 @@ const listings = [
   {
     id: 11,
     type: "project",
-    owner: "nu-medai",
-    name: "MedScan-Triage",
     title: "MedScan Diagnostic Assistant",
     desc: "Open-source medical imaging triage assistant built by NU bioengineering and CS students using lightweight vision-language pipelines.",
     roles: ["AI / ML", "Frontend"],
@@ -187,14 +165,12 @@ const listings = [
   {
     id: 12,
     type: "hackathon",
-    owner: "astana-hub",
-    name: "GovTech-AI-Sprint",
-    title: "Astana GovTech & Civic AI Sprint",
+    title: "Civic & EdTech AI Sprint",
     desc: "36-hour challenge building transparent public-service automation and multilingual Kazakh/Russian document assistants.",
     roles: ["Backend", "AI / ML", "Security"],
     tech: ["Python", "Docker", "PostgreSQL"],
-    uni: "Astana Hub",
-    leader: "Astana Hub Org",
+    uni: "AITU",
+    leader: "AITU Innovation Lab",
     teamText: "6 teams forming",
     updatedText: "1 week ago",
     updatedDays: 9,
@@ -203,8 +179,6 @@ const listings = [
   {
     id: 13,
     type: "project",
-    owner: "kbtu-robotics",
-    name: "DronePath-Sim",
     title: "Autonomous Drone Path Simulator",
     desc: "3D multi-agent pathfinding and obstacle avoidance simulator for search-and-rescue student robotics competitions.",
     roles: ["Algorithms", "Backend"],
@@ -219,8 +193,6 @@ const listings = [
   {
     id: 14,
     type: "project",
-    owner: "sdu-mobile",
-    name: "DormSwap-Marketplace",
     title: "DormSwap Campus Marketplace",
     desc: "Verified student-only mobile app for buying, selling, and exchanging textbooks, electronics, and dorm essentials on campus.",
     roles: ["Mobile", "UI/UX", "Backend"],
@@ -235,8 +207,6 @@ const listings = [
   {
     id: 15,
     type: "hackathon",
-    owner: "aitu-gamejam",
-    name: "CentralAsia-GameJam",
     title: "AITU Interactive Web & Game Jam",
     desc: "Weekend creative coding jam focused on browser-based multiplayer experiences, WebGL shaders, and collaborative storytelling.",
     roles: ["Frontend", "UI/UX"],
@@ -251,8 +221,6 @@ const listings = [
   {
     id: 16,
     type: "competition",
-    owner: "nu-cp-club",
-    name: "NU-Open-Programming-Cup",
     title: "NU Open Competitive Programming Cup",
     desc: "5-hour ICPC-format team contest open to university students across Kazakhstan. Recruiting 3rd member proficient in C++ templates.",
     roles: ["Algorithms"],
@@ -267,8 +235,6 @@ const listings = [
   {
     id: 17,
     type: "project",
-    owner: "kbtu-cloud",
-    name: "KubeLite-Lab-Runner",
     title: "KubeLite Student Cloud Runner",
     desc: "Lightweight container orchestration dashboard allowing student teams to deploy hackathon backends in one click on university servers.",
     roles: ["Security", "Backend", "QA"],
@@ -283,8 +249,6 @@ const listings = [
   {
     id: 18,
     type: "hackathon",
-    owner: "sdu-tech",
-    name: "SDU-Startup-Weekend",
     title: "SDU EdTech Startup Weekend",
     desc: "Build and pitch a working EdTech MVP in 48 hours with mentorship from alumni founders and venture analysts.",
     roles: ["Frontend", "Backend", "Mobile", "UI/UX"],
@@ -299,13 +263,11 @@ const listings = [
   {
     id: 19,
     type: "project",
-    owner: "astana-open",
-    name: "KazNLP-Corpus-Builder",
     title: "KazNLP Open Benchmark & Corpus",
     desc: "Collaborative open-source tool for cleaning, annotating, and evaluating Kazakh-language instruction datasets for student AI research.",
     roles: ["AI / ML", "QA"],
     tech: ["Python", "LangGraph", "PostgreSQL"],
-    uni: "Astana Hub",
+    uni: "Nazarbayev University",
     leader: "Zere Suleimen",
     teamText: "4 / 6 members",
     updatedText: "3 weeks ago",
@@ -315,8 +277,6 @@ const listings = [
   {
     id: 20,
     type: "competition",
-    owner: "sdu-algo",
-    name: "SDU-Winter-ICPC-Quals",
     title: "SDU Winter ICPC Qualification Squad",
     desc: "Structured problem-solving bootcamp covering number theory, flows, and bitmasks ahead of winter university qualifiers.",
     roles: ["Algorithms"],
@@ -378,8 +338,6 @@ function getFilteredListings() {
 
     if (q) {
       const searchable = [
-        item.owner,
-        item.name,
         item.title,
         item.desc,
         item.uni,
@@ -536,8 +494,8 @@ function buildCardHTML(item) {
       <div class="hf-card-header">
         <div class="hf-card-identity">
           <div class="hf-avatar-badge ${meta.avatarClass}">${meta.letter}</div>
-          <div class="hf-slug" title="${escapeHTML(item.owner)}/${escapeHTML(item.name)}">
-            <span class="hf-owner">${escapeHTML(item.owner)}</span><span class="hf-slash">/</span><span class="hf-name">${escapeHTML(item.name)}</span>
+          <div class="hf-slug" title="${escapeHTML(item.title)}">
+            <span class="hf-name">${escapeHTML(item.title)}</span>
           </div>
         </div>
         <div class="hf-card-right">
@@ -753,7 +711,6 @@ function openDetailModal(id) {
   typeBadge.textContent = meta.label;
   typeBadge.className = `hf-type-badge ${meta.badgeClass}`;
 
-  document.getElementById("detail-slug").textContent = `${item.owner} / ${item.name}`;
   document.getElementById("detail-title").textContent = item.title;
   document.getElementById("detail-desc").textContent = item.desc;
   document.getElementById("detail-leader").textContent = item.leader;
@@ -825,14 +782,9 @@ function setupModals() {
     const techRaw = document.getElementById("new-tech").value;
     const desc = document.getElementById("new-desc").value.trim();
 
-    const slugName = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "new-listing";
-    const ownerSlug = uni.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "student";
-
     const newItem = {
       id: Date.now(),
       type,
-      owner: `${ownerSlug}-team`,
-      name: slugName,
       title,
       desc,
       roles: rolesRaw.split(",").map(s => s.trim()).filter(Boolean),
