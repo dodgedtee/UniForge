@@ -8,6 +8,7 @@ const {
   getListings,
   addCustomListing,
   getRequestedIds,
+  formatContributorsLabel,
   escapeHTML,
   showToast,
   setupFooterYear,
@@ -233,7 +234,7 @@ function buildCardHTML(item) {
             </svg>
             ${escapeHTML(item.uni)}
           </span>
-          <span class="hf-meta-item">• ${escapeHTML(item.teamText)}</span>
+          <span class="hf-meta-item">• ${escapeHTML(formatContributorsLabel(item, state.requestedIds, true))}</span>
         </div>
         <div class="hf-meta-group">
           ${requestedBadge}
@@ -443,7 +444,7 @@ function setupCreateModal() {
       tech: techRaw.split(",").map(s => s.trim()).filter(Boolean),
       uni,
       leader: "You (Verified Student)",
-      teamText: type === "project" ? "1 / 4 members" : "1 team forming",
+      contributorsCount: 1,
       updatedText: "Just now",
       updatedDays: 0,
       likes: 1

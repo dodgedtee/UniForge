@@ -16,8 +16,14 @@ const CONTRIBUTE_LABELS = {
 };
 
 function renderProjectDetail() {
-  const { TYPE_META, getListings, getRequestedIds, toggleRequestedId, showToast } =
-    window.UniForgeData;
+  const {
+    TYPE_META,
+    getListings,
+    getRequestedIds,
+    toggleRequestedId,
+    formatContributorsLabel,
+    showToast
+  } = window.UniForgeData;
 
   const params = new URLSearchParams(window.location.search);
   const idParam = Number(params.get("id"));
@@ -48,7 +54,6 @@ function renderProjectDetail() {
   document.getElementById("project-summary").textContent = item.desc;
   document.getElementById("project-uni").textContent = item.uni;
   document.getElementById("project-leader").textContent = item.leader;
-  document.getElementById("project-team").textContent = item.teamText;
   document.getElementById("project-updated").textContent = item.updatedText;
 
   document.getElementById("about-heading").textContent =
@@ -64,7 +69,12 @@ function renderProjectDetail() {
   const noteInput = document.getElementById("contribute-note");
 
   function syncContributeState() {
-    const isRequested = getRequestedIds().has(item.id);
+    const requestedIds = getRequestedIds();
+    const isRequested = requestedIds.has(item.id);
+    document.getElementById("project-contributors").textContent = formatContributorsLabel(
+      item,
+      requestedIds
+    );
     if (isRequested) {
       contributeBtn.innerHTML = `<span>&#10003; Contribution Invite Sent</span>`;
       contributeBtn.classList.remove("btn-primary");

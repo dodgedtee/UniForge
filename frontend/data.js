@@ -16,7 +16,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Python", "LangGraph", "React", "FastAPI"],
     uni: "SDU",
     leader: "Alikhan Saparov",
-    teamText: "3 / 5 members",
+    contributorsCount: 12,
     updatedText: "2 hours ago",
     updatedDays: 0.1,
     likes: 42
@@ -32,7 +32,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Python", "FastAPI", "PostgreSQL", "Docker"],
     uni: "KBTU",
     leader: "KBTU Tech Hub",
-    teamText: "3 teams forming",
+    contributorsCount: 18,
     updatedText: "5 hours ago",
     updatedDays: 0.2,
     likes: 68
@@ -48,7 +48,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Java", "PostgreSQL", "Docker"],
     uni: "KBTU",
     leader: "Dana Bekova",
-    teamText: "2 / 4 members",
+    contributorsCount: 7,
     updatedText: "1 day ago",
     updatedDays: 1,
     likes: 29
@@ -64,7 +64,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Flutter", "Node.js", "PostgreSQL"],
     uni: "Nazarbayev University",
     leader: "Timur Nurlanov",
-    teamText: "4 / 5 members",
+    contributorsCount: 14,
     updatedText: "1 day ago",
     updatedDays: 1.2,
     likes: 51
@@ -80,7 +80,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Python", "LangGraph", "FastAPI"],
     uni: "Nazarbayev University",
     leader: "Amina Serikova",
-    teamText: "5 teams forming",
+    contributorsCount: 24,
     updatedText: "2 days ago",
     updatedDays: 2,
     likes: 84
@@ -96,7 +96,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Docker", "Go", "Python"],
     uni: "AITU",
     leader: "Dias Marat",
-    teamText: "2 / 4 members",
+    contributorsCount: 9,
     updatedText: "3 days ago",
     updatedDays: 3,
     likes: 37
@@ -112,7 +112,7 @@ const DEFAULT_LISTINGS = [
     tech: ["C++", "Python"],
     uni: "KBTU",
     leader: "Erlan Tolegen",
-    teamText: "2 / 3 members",
+    contributorsCount: 6,
     updatedText: "4 days ago",
     updatedDays: 4,
     likes: 33
@@ -128,7 +128,7 @@ const DEFAULT_LISTINGS = [
     tech: ["React", "Node.js", "Go", "PostgreSQL"],
     uni: "KBTU",
     leader: "Jusan & KBTU",
-    teamText: "2 teams forming",
+    contributorsCount: 15,
     updatedText: "5 days ago",
     updatedDays: 5,
     likes: 47
@@ -144,7 +144,7 @@ const DEFAULT_LISTINGS = [
     tech: ["React", "Node.js", "PostgreSQL"],
     uni: "SDU",
     leader: "Madina Karim",
-    teamText: "3 / 6 members",
+    contributorsCount: 8,
     updatedText: "6 days ago",
     updatedDays: 6,
     likes: 21
@@ -160,7 +160,7 @@ const DEFAULT_LISTINGS = [
     tech: ["C++", "Java"],
     uni: "AITU",
     leader: "Nursultan Zhan",
-    teamText: "4 teams forming",
+    contributorsCount: 19,
     updatedText: "1 week ago",
     updatedDays: 7,
     likes: 39
@@ -176,7 +176,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Python", "FastAPI", "React"],
     uni: "Nazarbayev University",
     leader: "Arman Kassymov",
-    teamText: "3 / 5 members",
+    contributorsCount: 11,
     updatedText: "1 week ago",
     updatedDays: 8,
     likes: 56
@@ -192,7 +192,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Python", "Docker", "PostgreSQL"],
     uni: "AITU",
     leader: "AITU Innovation Lab",
-    teamText: "6 teams forming",
+    contributorsCount: 21,
     updatedText: "1 week ago",
     updatedDays: 9,
     likes: 63
@@ -208,7 +208,7 @@ const DEFAULT_LISTINGS = [
     tech: ["C++", "Python", "Docker"],
     uni: "KBTU",
     leader: "Ilyas Akhmetov",
-    teamText: "2 / 4 members",
+    contributorsCount: 10,
     updatedText: "2 weeks ago",
     updatedDays: 10,
     likes: 44
@@ -224,7 +224,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Flutter", "Node.js", "PostgreSQL"],
     uni: "SDU",
     leader: "Aigerim Tursyn",
-    teamText: "3 / 5 members",
+    contributorsCount: 13,
     updatedText: "2 weeks ago",
     updatedDays: 11,
     likes: 35
@@ -240,7 +240,7 @@ const DEFAULT_LISTINGS = [
     tech: ["React", "Node.js"],
     uni: "AITU",
     leader: "AITU DevClub",
-    teamText: "4 teams forming",
+    contributorsCount: 16,
     updatedText: "2 weeks ago",
     updatedDays: 12,
     likes: 49
@@ -256,7 +256,7 @@ const DEFAULT_LISTINGS = [
     tech: ["C++", "Java"],
     uni: "Nazarbayev University",
     leader: "Sanzhar Omar",
-    teamText: "2 / 3 members",
+    contributorsCount: 11,
     updatedText: "2 weeks ago",
     updatedDays: 13,
     likes: 41
@@ -272,7 +272,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Go", "Docker", "PostgreSQL"],
     uni: "KBTU",
     leader: "Olzhas Bekturov",
-    teamText: "3 / 4 members",
+    contributorsCount: 9,
     updatedText: "3 weeks ago",
     updatedDays: 14,
     likes: 58
@@ -288,7 +288,7 @@ const DEFAULT_LISTINGS = [
     tech: ["React", "Flutter", "FastAPI"],
     uni: "SDU",
     leader: "SDU Technopark",
-    teamText: "7 teams forming",
+    contributorsCount: 27,
     updatedText: "3 weeks ago",
     updatedDays: 15,
     likes: 72
@@ -304,7 +304,7 @@ const DEFAULT_LISTINGS = [
     tech: ["Python", "LangGraph", "PostgreSQL"],
     uni: "Nazarbayev University",
     leader: "Zere Suleimen",
-    teamText: "4 / 6 members",
+    contributorsCount: 17,
     updatedText: "3 weeks ago",
     updatedDays: 16,
     likes: 77
@@ -320,7 +320,7 @@ const DEFAULT_LISTINGS = [
     tech: ["C++", "Python"],
     uni: "SDU",
     leader: "Baurzhan Ali",
-    teamText: "2 / 3 members",
+    contributorsCount: 8,
     updatedText: "1 month ago",
     updatedDays: 18,
     likes: 28
@@ -439,12 +439,20 @@ function setupMobileNav() {
   });
 }
 
+function formatContributorsLabel(item, requestedIds = getRequestedIds(), withVerb = false) {
+  const base = Number.isFinite(item?.contributorsCount) ? item.contributorsCount : 1;
+  const count = base + (requestedIds.has(item?.id) ? 1 : 0);
+  const noun = count === 1 ? "student" : "students";
+  return withVerb ? `${count} ${noun} contributing` : `${count} ${noun}`;
+}
+
 window.UniForgeData = {
   TYPE_META,
   getListings,
   addCustomListing,
   getRequestedIds,
   toggleRequestedId,
+  formatContributorsLabel,
   escapeHTML,
   showToast,
   setupFooterYear,
