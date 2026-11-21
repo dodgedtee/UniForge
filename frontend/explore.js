@@ -450,6 +450,7 @@ function setupCreateModal() {
 
     const newItem = {
       id: Date.now(),
+      ownerId: window.UniForgeData.getCurrentUserId(),
       type,
       title,
       desc,

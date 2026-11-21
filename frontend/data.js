@@ -343,11 +343,14 @@ const TYPE_META = {
   competition: { label: "Competition", badgeClass: "badge-competition", avatarClass: "avatar-competition", letter: "C" }
 };
 
+
 const STORAGE_KEYS = {
   CUSTOM_LISTINGS: "uniforge_custom_listings",
   REQUESTED_IDS: "uniforge_requested_ids",
-  LIKED_IDS: "uniforge_liked_ids"
+  LIKED_IDS: "uniforge_liked_ids",
+  CURRENT_USER: "uniforge_demo_user_id"
 };
+
 
 function readStorageJSON(key, fallback) {
   try {
@@ -366,6 +369,38 @@ function writeStorageJSON(key, value) {
   }
 }
 
+
+// Temporary user identity for frontend testing.
+// Replace with authenticated user ID when backend is ready.
+
+function getCurrentUserId() {
+  try {
+    let userId = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
+
+    if (!userId) {
+      userId = crypto.randomUUID();
+      localStorage.setItem(STORAGE_KEYS.CURRENT_USER, userId);
+    }
+
+    return userId;
+  } catch (error) {
+    console.warn("Could not create demo user ID:", error);
+    return null;
+  }
+}
+
+// Get only projects belonging to the current demo user.
+function getMyListings() {
+  const userId = getCurrentUserId();
+
+  if (!userId) return [];
+
+  return getListings().filter(item =>
+    item.ownerId === userId
+  );
+}
+
+
 function getListings() {
   const custom = readStorageJSON(STORAGE_KEYS.CUSTOM_LISTINGS, []);
   return [...custom, ...DEFAULT_LISTINGS];
@@ -376,6 +411,96 @@ function addCustomListing(item) {
   custom.unshift(item);
   writeStorageJSON(STORAGE_KEYS.CUSTOM_LISTINGS, custom);
 }
+
+
+/* Update an existing listing owned by current user */
+function updateListing(id, changes) {
+  const userId = getCurrentUserId();
+  if (!userId) return false;
+
+  const custom = readStorageJSON(
+    STORAGE_KEYS.CUSTOM_LISTINGS,
+    []
+  );
+
+  if (!Array.isArray(custom)) return false;
+
+  const index = custom.findIndex(item =>
+    item.id === id && item.ownerId === userId
+  );
+
+  if (index === -1) return false;
+
+  const allowedFields = [
+    "title",
+    "desc",
+    "overview",
+    "tech",
+    "roles",
+    "uni",
+    "github",
+    "status"
+  ];
+
+  const safeChanges = {};
+
+  allowedFields.forEach(field => {
+    if (Object.prototype.hasOwnProperty.call(changes, field)) {
+      safeChanges[field] = changes[field];
+    }
+  });
+
+  custom[index] = {
+    ...custom[index],
+    ...safeChanges
+  };
+
+  try {
+    localStorage.setItem(
+      STORAGE_KEYS.CUSTOM_LISTINGS,
+      JSON.stringify(custom)
+    );
+    return true;
+  } catch (error) {
+    console.error("Could not update listing:", error);
+    return false;
+  }
+}
+
+/* Delete a listing owned by current user */
+function deleteListing(id) {
+  const userId = getCurrentUserId();
+  if (!userId) return false;
+
+  const custom = readStorageJSON(
+    STORAGE_KEYS.CUSTOM_LISTINGS,
+    []
+  );
+
+  if (!Array.isArray(custom)) return false;
+
+  const exists = custom.some(item =>
+    item.id === id && item.ownerId === userId
+  );
+
+  if (!exists) return false;
+
+  const updated = custom.filter(item =>
+    !(item.id === id && item.ownerId === userId)
+  );
+
+  try {
+    localStorage.setItem(
+      STORAGE_KEYS.CUSTOM_LISTINGS,
+      JSON.stringify(updated)
+    );
+    return true;
+  } catch (error) {
+    console.error("Could not delete listing:", error);
+    return false;
+  }
+}
+
 
 function readStoredIdSet(storageKey) {
   return new Set(readStorageJSON(storageKey, []));
@@ -496,10 +621,15 @@ function formatParticipantsLabel(item, requestedIds = getRequestedIds(), isCard 
   return isCard ? `${count} ${noun} contributing` : `${count} ${noun}`;
 }
 
+
 window.UniForgeData = {
   TYPE_META,
   getListings,
   addCustomListing,
+  updateListing,
+  deleteListing,
+  getCurrentUserId,
+  getMyListings,
   getRequestedIds,
   addRequestedId,
   getLikedIds,
@@ -512,5 +642,6 @@ window.UniForgeData = {
   setupFooterYear,
   setupMobileNav
 };
+
 })();
 

@@ -18,18 +18,88 @@ document.addEventListener("DOMContentLoaded", () => {
     const aboutInput = document.getElementById("edit-about");
     const skillsInput = document.getElementById("edit-skills");
 
+
+    const githubInput = document.getElementById("edit-github");
+    const linkedinInput = document.getElementById("edit-linkedin");
+    const telegramInput = document.getElementById("edit-telegram");
+
+    const githubLink = document.getElementById("social-github");
+    const linkedinLink = document.getElementById("social-linkedin");
+    const telegramLink = document.getElementById("social-telegram");
+    const socialEmpty = document.getElementById("social-empty");
+
+
     const storageKey = "uniforge-demo-profile";
     let previousFocus = null;
 
     // Default information shown before the first save
+    
     const defaultProfile = {
         name: nameEl.textContent.trim(),
         university: universityEl.textContent.trim(),
         role: roleEl.textContent.trim(),
         about: aboutEl.textContent.trim(),
         skills: Array.from(skillsEl.querySelectorAll(".skill-tag"))
-            .map(skill => skill.textContent.trim())
+            .map(skill => skill.textContent.trim()),
+        github: "",
+        linkedin: "",
+        telegram: ""
     };
+
+
+    function validSocialUrl(value, platform) {
+        if (!value) return "";
+
+        try {
+            const url = new URL(value);
+
+            if (url.protocol !== "https:") return null;
+
+            const allowedHosts = {
+                github: ["github.com", "www.github.com"],
+                linkedin: ["linkedin.com", "www.linkedin.com"],
+                telegram: ["t.me"]
+            };
+
+            if (!allowedHosts[platform].includes(url.hostname.toLowerCase())) {
+                return null;
+            }
+
+            if (url.username || url.password || url.pathname === "/") {
+                return null;
+            }
+
+            return url.href;
+        } catch {
+            return null;
+        }
+    }
+
+    function renderSocialLinks(profile) {
+        const links = [
+            [githubLink, profile.github, "github"],
+            [linkedinLink, profile.linkedin, "linkedin"],
+            [telegramLink, profile.telegram, "telegram"]
+        ];
+
+        let visibleCount = 0;
+
+        links.forEach(([element, value, platform]) => {
+            const url = validSocialUrl(value || "", platform);
+
+            if (url) {
+                element.href = url;
+                element.classList.remove("hidden");
+                visibleCount++;
+            } else {
+                element.removeAttribute("href");
+                element.classList.add("hidden");
+            }
+        });
+
+        socialEmpty.classList.toggle("hidden", visibleCount > 0);
+    }
+
 
     function renderProfile(profile) {
         nameEl.textContent = profile.name;
@@ -45,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tag.textContent = skill;
             skillsEl.appendChild(tag);
         });
+        renderSocialLinks(profile);
     }
 
     function loadProfile() {
@@ -66,7 +137,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 return defaultProfile;
             }
 
-            return parsed;
+            
+            return {
+                ...defaultProfile,
+                ...parsed,
+                github: parsed.github || "",
+                linkedin: parsed.linkedin || "",
+                telegram: parsed.telegram || ""
+            };
+
         } catch (error) {
             console.warn("Profile could not be loaded:", error);
             return defaultProfile;
@@ -82,6 +161,14 @@ document.addEventListener("DOMContentLoaded", () => {
         skillsInput.value = Array.from(
             skillsEl.querySelectorAll(".skill-tag")
         ).map(skill => skill.textContent.trim()).join(", ");
+
+
+        const savedProfile = loadProfile();
+
+        githubInput.value = savedProfile.github || "";
+        linkedinInput.value = savedProfile.linkedin || "";
+        telegramInput.value = savedProfile.telegram || "";
+
 
         previousFocus = document.activeElement;
         modal.classList.remove("hidden");
@@ -136,6 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", event => {
         event.preventDefault();
 
+                
         const profile = {
             name: nameInput.value.trim(),
             university: universityInput.value.trim(),
@@ -146,13 +234,31 @@ document.addEventListener("DOMContentLoaded", () => {
                     .split(",")
                     .map(skill => skill.trim())
                     .filter(Boolean)
-            )]
+            )],
+            github: githubInput.value.trim(),
+            linkedin: linkedinInput.value.trim(),
+            telegram: telegramInput.value.trim()
         };
+
 
         if (!profile.name || !profile.university || !profile.role) {
             alert("Please fill in all required fields.");
             return;
         }
+
+
+        for (const platform of ["github", "linkedin", "telegram"]) {
+            const value = profile[platform];
+            const url = validSocialUrl(value, platform);
+
+            if (url === null) {
+                alert(`Please enter a valid HTTPS ${platform} profile URL.`);
+                return;
+            }
+
+            profile[platform] = url;
+        }
+
 
         try {
             localStorage.setItem(storageKey, JSON.stringify(profile));
@@ -571,6 +677,540 @@ document.addEventListener("DOMContentLoaded", () => {
                 event.preventDefault();
                 first.focus();
             }
+        }
+    });
+});
+
+
+
+
+/* ==========================================
+   UniForge — My Projects
+   Shared Integration with Explore
+   ========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const addBtn = document.getElementById("add-project-btn");
+    const modal = document.getElementById("project-modal");
+    const modalTitle = document.getElementById("project-modal-title");
+    const closeBtn = document.getElementById("close-project-modal");
+    const cancelBtn = document.getElementById("cancel-project-btn");
+    const form = document.getElementById("project-form");
+
+    const nameInput = document.getElementById("project-name");
+    const descriptionInput = document.getElementById("project-description");
+    const technologiesInput = document.getElementById("project-technologies");
+    const githubInput = document.getElementById("project-github");
+    const statusInput = document.getElementById("project-status");
+
+    const projectsList = document.getElementById("profile-projects");
+    const emptyState = document.getElementById("projects-empty");
+
+    const data = window.UniForgeData;
+    const LEGACY_KEY = "uniforge-demo-projects";
+
+    let projects = [];
+    let editingProjectId = null;
+    let previousFocus = null;
+
+    if (!data ||
+        typeof data.getMyListings !== "function" ||
+        typeof data.addCustomListing !== "function" ||
+        typeof data.updateListing !== "function" ||
+        typeof data.deleteListing !== "function") {
+        console.error("UniForge shared data is not available.");
+        return;
+    }
+
+    // Current profile information
+    function getProfileInfo() {
+        return {
+            name: document.getElementById("profile-name")
+                ?.textContent.trim() || "You",
+            university: document.getElementById("profile-university")
+                ?.textContent.trim() || "Not specified"
+        };
+    }
+
+    // Load projects from the shared Explore storage
+    function loadProjects() {
+        return data.getMyListings().filter(item =>
+            item.type === "project"
+        );
+    }
+
+    // Migrate older Profile projects without deleting them
+    function migrateLegacyProjects() {
+        let oldProjects;
+
+        try {
+            oldProjects = JSON.parse(
+                localStorage.getItem(LEGACY_KEY) || "[]"
+            );
+        } catch (error) {
+            console.warn("Cannot read older projects:", error);
+            return;
+        }
+
+        if (!Array.isArray(oldProjects)) return;
+
+        const ownerId = data.getCurrentUserId();
+        if (!ownerId) return;
+
+        const info = getProfileInfo();
+
+        oldProjects.forEach(old => {
+            if (
+                !old ||
+                typeof old.id !== "string" ||
+                typeof old.name !== "string" ||
+                typeof old.description !== "string"
+            ) return;
+
+            // Do not import the same old project twice
+            const alreadyExists = data.getListings().some(
+                item =>
+                    item.ownerId === ownerId &&
+                    item.legacyProfileId === old.id
+            );
+
+            if (alreadyExists) return;
+
+            // Shared listings use numeric IDs
+            const existingIds = new Set(
+                data.getListings().map(item => item.id)
+            );
+
+            let id = Date.now();
+
+            while (existingIds.has(id)) {
+                id++;
+            }
+
+            const newItem = {
+                id,
+                type: "project",
+                ownerId,
+                legacyProfileId: old.id,
+                title: old.name,
+                desc: old.description,
+                overview: old.description,
+                tech: Array.isArray(old.technologies)
+                    ? old.technologies.filter(
+                        t => typeof t === "string"
+                    )
+                    : [],
+                roles: [],
+                uni: info.university,
+                leader: info.name,
+                github: typeof old.github === "string"
+                    ? old.github : "",
+                status: ["in-progress", "completed"].includes(old.status)
+                    ? old.status : "in-progress",
+                contributorsCount: 1,
+                createdText: "Previously added",
+                createdDays: 0,
+                likes: 0
+            };
+
+            data.addCustomListing(newItem);
+
+            const imported = data.getListings().some(
+                item => item.id === id &&
+                        item.ownerId === ownerId
+            );
+
+            if (!imported) {
+                console.warn("Could not import:", old.name);
+            }
+        });
+
+        // Original localStorage data is kept as a backup
+    }
+
+    function validateGithubUrl(value) {
+        if (!value) return "";
+
+        try {
+            const url = new URL(value);
+
+            if (
+                url.protocol !== "https:" ||
+                !["github.com", "www.github.com"].includes(
+                    url.hostname.toLowerCase()
+                ) ||
+                url.username ||
+                url.password ||
+                url.pathname === "/"
+            ) {
+                return null;
+            }
+
+            return url.href;
+        } catch {
+            return null;
+        }
+    }
+
+    function createElement(tag, className, text) {
+        const element = document.createElement(tag);
+
+        if (className) element.className = className;
+        if (text !== undefined) element.textContent = text;
+
+        return element;
+    }
+
+    // Render shared project cards
+    function renderProjects() {
+        projects = loadProjects();
+        projectsList.replaceChildren();
+
+        emptyState.classList.toggle(
+            "hidden",
+            projects.length > 0
+        );
+
+        projects.forEach(project => {
+            const card = createElement(
+                "article",
+                "project-item"
+            );
+
+            const top = createElement(
+                "div",
+                "project-item-top"
+            );
+
+            const title = createElement(
+                "h3",
+                "project-item-title"
+            );
+
+            const titleLink = createElement(
+                "a",
+                "",
+                project.title
+            );
+
+            titleLink.href =
+                "../project.html?id=" +
+                encodeURIComponent(project.id);
+
+            title.appendChild(titleLink);
+
+            const statusValue = project.status === "completed"
+                ? "completed" : "in-progress";
+
+            const status = createElement(
+                "span",
+                `project-status project-status-${statusValue}`,
+                statusValue === "completed"
+                    ? "Completed"
+                    : "In Progress"
+            );
+
+            top.append(title, status);
+
+            const description = createElement(
+                "p",
+                "project-item-description",
+                project.desc || ""
+            );
+
+            const techList = createElement(
+                "div",
+                "project-tech-list"
+            );
+
+            (project.tech || []).forEach(technology => {
+                techList.appendChild(
+                    createElement(
+                        "span",
+                        "project-tech-tag",
+                        technology
+                    )
+                );
+            });
+
+            const actions = createElement(
+                "div",
+                "project-item-actions"
+            );
+
+            if (project.github) {
+                const github = validateGithubUrl(project.github);
+
+                if (github) {
+                    const link = createElement(
+                        "a",
+                        "project-github-link",
+                        "GitHub ↗"
+                    );
+
+                    link.href = github;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+
+                    actions.appendChild(link);
+                }
+            }
+
+            const viewBtn = createElement(
+                "a",
+                "project-action-btn",
+                "View"
+            );
+
+            viewBtn.href =
+                "../project.html?id=" +
+                encodeURIComponent(project.id);
+
+            const editBtn = createElement(
+                "button",
+                "project-action-btn",
+                "Edit"
+            );
+
+            editBtn.type = "button";
+            editBtn.addEventListener("click", () => {
+                openEditModal(project.id);
+            });
+
+            const deleteBtn = createElement(
+                "button",
+                "project-action-btn project-delete-btn",
+                "Delete"
+            );
+
+            deleteBtn.type = "button";
+            deleteBtn.addEventListener("click", () => {
+                deleteProject(project.id);
+            });
+
+            actions.append(viewBtn, editBtn, deleteBtn);
+            card.append(top, description, techList, actions);
+
+            projectsList.appendChild(card);
+        });
+    }
+
+    function openAddModal() {
+        editingProjectId = null;
+        form.reset();
+
+        modalTitle.textContent = "Add New Project";
+        previousFocus = document.activeElement;
+
+        modal.classList.remove("hidden");
+        nameInput.focus();
+    }
+
+    function openEditModal(id) {
+        const project = projects.find(
+            item => item.id === id
+        );
+
+        if (!project) return;
+
+        editingProjectId = id;
+
+        nameInput.value = project.title;
+        descriptionInput.value = project.desc || "";
+        technologiesInput.value = (project.tech || [])
+            .join(", ");
+        githubInput.value = project.github || "";
+        statusInput.value = project.status || "in-progress";
+
+        modalTitle.textContent = "Edit Project";
+        previousFocus = document.activeElement;
+
+        modal.classList.remove("hidden");
+        nameInput.focus();
+    }
+
+    function closeModal() {
+        modal.classList.add("hidden");
+        editingProjectId = null;
+        previousFocus?.focus();
+    }
+
+    function deleteProject(id) {
+        const project = projects.find(
+            item => item.id === id
+        );
+
+        if (!project) return;
+
+        if (!confirm(
+            `Are you sure you want to delete "${project.title}"?`
+        )) return;
+
+        const success = data.deleteListing(id);
+
+        if (!success) {
+            alert("Could not delete this project.");
+            return;
+        }
+
+        renderProjects();
+    }
+
+    // Add or update a project using shared storage
+    form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const title = nameInput.value.trim();
+        const desc = descriptionInput.value.trim();
+
+        const tech = [...new Set(
+            technologiesInput.value
+                .split(",")
+                .map(value => value.trim())
+                .filter(Boolean)
+        )];
+
+        const github = validateGithubUrl(
+            githubInput.value.trim()
+        );
+
+        const status = statusInput.value;
+
+        if (!title || !desc) {
+            alert("Project name and description are required.");
+            return;
+        }
+
+        if (github === null) {
+            alert("Enter a valid HTTPS GitHub URL.");
+            githubInput.focus();
+            return;
+        }
+
+        if (!["in-progress", "completed"].includes(status)) {
+            alert("Select a valid project status.");
+            return;
+        }
+
+        const projectData = {
+            title,
+            desc,
+            overview: desc,
+            tech,
+            github,
+            status
+        };
+
+        if (editingProjectId !== null) {
+            const success = data.updateListing(
+                editingProjectId,
+                projectData
+            );
+
+            if (!success) {
+                alert("Could not update this project.");
+                return;
+            }
+        } else {
+            const ownerId = data.getCurrentUserId();
+
+            if (!ownerId) {
+                alert("Demo user ID is not available.");
+                return;
+            }
+
+            const info = getProfileInfo();
+
+            const existingIds = new Set(
+                data.getListings().map(item => item.id)
+            );
+
+            let id = Date.now();
+
+            while (existingIds.has(id)) id++;
+
+            const newItem = {
+                id,
+                type: "project",
+                ownerId,
+                ...projectData,
+                roles: [],
+                uni: info.university,
+                leader: info.name,
+                contributorsCount: 1,
+                createdText: "Just now",
+                createdDays: 0,
+                likes: 0
+            };
+
+            data.addCustomListing(newItem);
+
+            // Check that the listing was actually stored
+            const saved = data.getListings().some(
+                item =>
+                    item.id === id &&
+                    item.ownerId === ownerId
+            );
+
+            if (!saved) {
+                alert("Could not save the new project.");
+                return;
+            }
+        }
+
+        renderProjects();
+        closeModal();
+    });
+
+    addBtn.addEventListener("click", openAddModal);
+    closeBtn.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", event => {
+        if (event.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", event => {
+        if (modal.classList.contains("hidden")) return;
+
+        if (event.key === "Escape") {
+            closeModal();
+            return;
+        }
+
+        if (event.key === "Tab") {
+            const controls = Array.from(
+                modal.querySelectorAll(
+                    "button, input, textarea, select"
+                )
+            ).filter(element => !element.disabled);
+
+            const first = controls[0];
+            const last = controls[controls.length - 1];
+
+            if (event.shiftKey &&
+                document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey &&
+                document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        }
+    });
+
+    // Initial synchronization
+    migrateLegacyProjects();
+    renderProjects();
+
+    // Refresh after returning to Profile
+    window.addEventListener("pageshow", renderProjects);
+
+    // Refresh when shared storage changes in another tab
+    window.addEventListener("storage", event => {
+        if (event.key === "uniforge_custom_listings") {
+            renderProjects();
         }
     });
 });
