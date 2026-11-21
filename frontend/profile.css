@@ -1,0 +1,225 @@
+
+.profile-page {
+    min-height: 100vh;
+    background: var(--slate-50);
+    padding: 60px 0;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 36px;
+    background: white;
+    border: 1px solid var(--slate-200);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+}
+
+.profile-avatar {
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--slate-400);
+    background: var(--slate-100);
+    border: 3px solid var(--blue-200);
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.profile-details h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--slate-900);
+}
+
+.profile-details p {
+    color: var(--slate-500);
+    margin: 6px 0 12px;
+}
+
+.profile-role {
+    display: inline-block;
+    background: var(--blue-50);
+    color: var(--blue-700);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+@media (max-width: 640px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+    }
+
+    .profile-details {
+        width: 100%;
+    }
+}
+
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 28px;
+}
+
+.profile-card {
+    background: white;
+    padding: 30px;
+    border: 1px solid var(--slate-200);
+    border-radius: 18px;
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-card h2 {
+    color: var(--slate-900);
+    font-size: 21px;
+    margin-bottom: 18px;
+}
+
+.profile-card p {
+    color: var(--slate-600);
+    line-height: 1.7;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background: var(--blue-50);
+    color: var(--blue-700);
+    border: 1px solid var(--blue-100);
+    padding: 7px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Edit Profile Modal */
+
+.edit-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.edit-modal.hidden {
+    display: none;
+}
+
+.edit-modal-content {
+    background: white;
+    width: 100%;
+    max-width: 540px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    border-radius: 20px;
+    box-shadow: var(--shadow-xl);
+    padding: 30px;
+}
+
+.edit-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.edit-modal-header h2 {
+    color: var(--slate-900);
+    font-size: 24px;
+}
+
+#close-edit-modal {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: var(--slate-500);
+    cursor: pointer;
+}
+
+.edit-form-group {
+    margin-bottom: 20px;
+}
+
+.edit-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--slate-700);
+}
+
+.edit-form-group input,
+.edit-form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--slate-300);
+    border-radius: 10px;
+    background: white;
+    color: var(--slate-900);
+    font: inherit;
+    font-size: 15px;
+}
+
+.edit-form-group input:focus,
+.edit-form-group textarea:focus {
+    outline: none;
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.edit-form-group textarea {
+    resize: vertical;
+}
+
+.edit-form-group small {
+    display: block;
+    margin-top: 6px;
+    color: var(--slate-500);
+}
+
+.edit-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+@media (max-width: 640px) {
+    .edit-modal-content {
+        padding: 22px;
+    }
+
+    .edit-form-actions .btn {
+        flex: 1;
+    }
+}
