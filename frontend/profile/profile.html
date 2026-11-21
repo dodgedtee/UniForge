@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile | UniForge</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="profile.css">
 </head>
 <body>
@@ -14,13 +14,43 @@
     <main class="profile-page">
         <div class="container">
             <div class="profile-header">
-                <div class="profile-avatar" aria-label="Profile avatar">
-                    <svg viewBox="0 0 24 24" width="48" height="48"
-                        fill="currentColor" aria-hidden="true">
-                        <circle cx="12" cy="8" r="4"/>
-                        <path d="M4 21v-2c0-4.5 3.5-7 8-7s8 2.5 8 7v2z"/>
-                    </svg>
+                
+                
+                <div class="profile-photo-section">
+                    <div class="profile-avatar">
+                        <button type="button"
+                                class="avatar-upload-btn"
+                                id="avatar-upload-btn"
+                                aria-label="View profile photo">
+
+                            <img id="profile-avatar-image"
+                                class="avatar-image hidden"
+                                alt="Profile avatar">
+
+                            <svg id="default-avatar"
+                                viewBox="0 0 24 24"
+                                width="48" height="48"
+                                fill="currentColor"
+                                aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M4 21v-2c0-4.5 3.5-7 8-7s8 2.5 8 7v2z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button type="button"
+                            class="change-avatar-link"
+                            id="change-avatar-link">
+                        Change Photo
+                    </button>
+
+                    <input type="file"
+                        id="avatar-file-input"
+                        accept="image/png,image/jpeg,image/webp"
+                        hidden>
                 </div>
+
+
 
                 <div class="profile-details">
                     <h1 id="profile-name">Student Name</h1>
@@ -118,6 +148,74 @@
             </form>
         </div>
     </div>
+
+
+    
+    <!-- Profile Photo Crop Modal -->
+    <div class="photo-modal hidden" id="photo-modal">
+        <div class="photo-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="photo-modal-title">
+
+            <div class="photo-modal-header">
+                <h2 id="photo-modal-title">Adjust Profile Photo</h2>
+                <button type="button"
+                        id="close-photo-modal"
+                        aria-label="Close photo editor">
+                    &times;
+                </button>
+            </div>
+
+            <p class="crop-description">
+                Drag the photo to adjust its position.
+            </p>
+
+            <div class="crop-workspace">
+                <canvas id="crop-canvas"
+                        width="360"
+                        height="360"
+                        aria-label="Profile photo crop preview">
+                </canvas>
+            </div>
+
+            <div class="crop-zoom-control">
+                <label for="crop-zoom">Zoom</label>
+
+                <div class="crop-zoom-row">
+                    <span>−</span>
+                    <input type="range"
+                        id="crop-zoom"
+                        min="1"
+                        max="3"
+                        step="0.01"
+                        value="1">
+                    <span>+</span>
+                </div>
+            </div>
+
+            <div class="crop-actions">
+                <button type="button"
+                        class="btn btn-secondary"
+                        id="reset-photo-btn">
+                    Reset
+                </button>
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        id="cancel-photo-btn">
+                    Cancel
+                </button>
+
+                <button type="button"
+                        class="btn btn-primary"
+                        id="save-photo-btn">
+                    Save Photo
+                </button>
+            </div>
+        </div>
+    </div>
+
 
 
 
