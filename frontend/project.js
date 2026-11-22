@@ -114,6 +114,55 @@ function renderProjectDetail() {
   document.getElementById("project-title").textContent = item.title;
   document.getElementById("project-summary").textContent = item.desc;
   document.getElementById("project-uni").textContent = item.uni;
+
+
+    // Project Status and GitHub
+    const existingExtra = document.getElementById("project-extra-info");
+    existingExtra?.remove();
+
+    if (item.type === "project") {
+        const extraInfo = document.createElement("div");
+        extraInfo.id = "project-extra-info";
+
+        const status = document.createElement("p");
+        const statusValue = item.status === "completed"
+            ? "Completed"
+            : "In Progress";
+
+        status.textContent = `Project Status: ${statusValue}`;
+        extraInfo.appendChild(status);
+
+        // GitHub URL is optional
+        if (item.github) {
+            try {
+                const url = new URL(item.github);
+
+                if (
+                    url.protocol === "https:" &&
+                    ["github.com", "www.github.com"].includes(
+                        url.hostname.toLowerCase()
+                    ) &&
+                    !url.username &&
+                    !url.password
+                ) {
+                    const link = document.createElement("a");
+
+                    link.href = url.href;
+                    link.textContent = "View on GitHub ↗";
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+
+                    extraInfo.appendChild(link);
+                }
+            } catch (error) {
+                console.warn("Invalid project GitHub URL:", error);
+            }
+        }
+
+        document.getElementById("project-uni")
+            .insertAdjacentElement("afterend", extraInfo);
+    }
+
   document.getElementById("project-leader").textContent = item.leader;
   document.getElementById("project-participants-label").textContent = copy.participantsLabel;
   document.getElementById("project-created").textContent =

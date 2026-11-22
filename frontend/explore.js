@@ -429,10 +429,33 @@ function setupCreateModal() {
   const createForm = document.getElementById("create-form");
   const closeCreate = () => createModal?.classList.add("hidden");
 
-  const openCreate = () => {
-    createForm?.reset();
-    createModal?.classList.remove("hidden");
+
+  const typeSelect = document.getElementById("new-type");
+  const githubGroup = document.getElementById("create-github-group");
+  const statusGroup = document.getElementById("create-status-group");
+
+  const updateProjectFields = () => {
+      const isProject = typeSelect?.value === "project";
+
+      if (githubGroup) {
+          githubGroup.style.display = isProject ? "" : "none";
+      }
+
+      if (statusGroup) {
+          statusGroup.style.display = isProject ? "" : "none";
+      }
   };
+
+  typeSelect?.addEventListener("change", updateProjectFields);
+
+
+  
+  const openCreate = () => {
+      createForm?.reset();
+      updateProjectFields();
+      createModal?.classList.remove("hidden");
+  };
+
 
   document.getElementById("btn-new-listing")?.addEventListener("click", openCreate);
   document.getElementById("mobile-btn-new-listing")?.addEventListener("click", openCreate);
@@ -448,9 +471,17 @@ function setupCreateModal() {
     const techRaw = document.getElementById("new-tech").value;
     const desc = document.getElementById("new-desc").value.trim();
 
+    const githubInput = document.getElementById("new-github");
+    const statusInput = document.getElementById("new-status");
+
+    const github = githubInput.value.trim();
+    const status = statusInput.value;
+
     const newItem = {
       id: Date.now(),
       ownerId: window.UniForgeData.getCurrentUserId(),
+      github: type === "project" ? github : "",
+      status: type === "project" ? status : "",
       type,
       title,
       desc,

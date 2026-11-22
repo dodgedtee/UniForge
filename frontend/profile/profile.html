@@ -11,9 +11,20 @@
 <body>
 
     
+    
     <main class="profile-page">
         <div class="container">
+
+            <!-- Back Navigation -->
+            <a href="../start.html"
+                class="profile-back-link"
+                id="profile-back-link">
+                <span class="profile-back-icon" aria-hidden="true">←</span>
+                <span>Back to UniForge</span>
+            </a>
+
             <div class="profile-header">
+
                 
                 
                 <div class="profile-photo-section">
@@ -375,6 +386,31 @@
                 </div>
 
                 <!-- Technologies -->
+                
+
+                <!-- University / Host -->
+                <div class="project-form-group">
+                    <label for="project-university">University / Host *</label>
+                    <input
+                        type="text"
+                        id="project-university"
+                        placeholder="e.g. SDU, KBTU, AITU"
+                        maxlength="100"
+                        required>
+                </div>
+
+                <!-- Roles Needed -->
+                <div class="project-form-group">
+                    <label for="project-roles">Roles Needed</label>
+                    <input
+                        type="text"
+                        id="project-roles"
+                        placeholder="Frontend, Backend, UI/UX, AI / ML">
+
+                    <small>Separate roles with commas.</small>
+                </div>
+
+
                 <div class="project-form-group">
                     <label for="project-technologies">
                         Technologies

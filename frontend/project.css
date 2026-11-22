@@ -242,3 +242,39 @@
   }
 }
 
+
+/* Project Status and GitHub */
+
+#project-extra-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+#project-extra-info p {
+    margin: 0;
+    padding: 7px 12px;
+    border-radius: 8px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#project-extra-info a {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#project-extra-info a:hover {
+    background: #eff6ff;
+}

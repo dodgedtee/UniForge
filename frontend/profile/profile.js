@@ -700,6 +700,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const nameInput = document.getElementById("project-name");
     const descriptionInput = document.getElementById("project-description");
     const technologiesInput = document.getElementById("project-technologies");
+    const universityInput = document.getElementById("project-university");
+    const rolesInput = document.getElementById("project-roles");
     const githubInput = document.getElementById("project-github");
     const statusInput = document.getElementById("project-status");
 
@@ -1017,6 +1019,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         nameInput.value = project.title;
         descriptionInput.value = project.desc || "";
+        universityInput.value = project.uni || "";
+        rolesInput.value = (project.roles || []).join(", ");
         technologiesInput.value = (project.tech || [])
             .join(", ");
         githubInput.value = project.github || "";
@@ -1060,6 +1064,15 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", event => {
         event.preventDefault();
 
+        const uni = universityInput.value.trim();
+
+        const roles = [...new Set(
+            rolesInput.value
+                .split(",")
+                .map(value => value.trim())
+                .filter(Boolean)
+        )];
+
         const title = nameInput.value.trim();
         const desc = descriptionInput.value.trim();
 
@@ -1076,8 +1089,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const status = statusInput.value;
 
-        if (!title || !desc) {
-            alert("Project name and description are required.");
+        if (!title || !desc || !uni) {
+            alert("Project name, description and university are required.");
             return;
         }
 
@@ -1096,6 +1109,8 @@ document.addEventListener("DOMContentLoaded", () => {
             title,
             desc,
             overview: desc,
+            uni,
+            roles,
             tech,
             github,
             status
@@ -1134,8 +1149,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "project",
                 ownerId,
                 ...projectData,
-                roles: [],
-                uni: info.university,
                 leader: info.name,
                 contributorsCount: 1,
                 createdText: "Just now",
@@ -1214,3 +1227,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+
+
+/* ==========================================
+   Profile Back Navigation
+   ========================================== */
+
+document.getElementById("profile-back-link")
+    ?.addEventListener("click", event => {
+        const referrer = document.referrer;
+
+        if (!referrer) return;
+
+        try {
+            const previousPage = new URL(referrer);
+
+            if (
+                previousPage.origin === window.location.origin &&
+                previousPage.pathname !== window.location.pathname &&
+                window.history.length > 1
+            ) {
+                event.preventDefault();
+                window.history.back();
+            }
+        } catch (error) {
+            console.warn("Unable to read previous page:", error);
+        }
+    });

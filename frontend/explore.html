@@ -289,6 +289,26 @@
           <label for="new-desc">Short Description</label>
           <textarea id="new-desc" rows="3" class="form-input" placeholder="Describe what you're building or looking for..." required></textarea>
         </div>
+
+        <!-- GitHub URL (Projects only) -->
+        <div class="form-group" id="create-github-group">
+            <label for="new-github">GitHub URL</label>
+            <input
+                type="url"
+                id="new-github"
+                class="form-input"
+                placeholder="https://github.com/username/repository">
+        </div>
+
+        <!-- Project Status (Projects only) -->
+        <div class="form-group" id="create-status-group">
+            <label for="new-status">Project Status</label>
+            <select id="new-status" class="form-input">
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
+
         <div class="modal-actions">
           <button type="button" class="btn btn-secondary" id="create-cancel-btn">Cancel</button>
           <button type="submit" class="btn btn-primary">Publish Listing</button>
