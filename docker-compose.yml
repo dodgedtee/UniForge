@@ -1,0 +1,30 @@
+services:
+  uniforge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: uniforge-app
+    ports:
+      - "${UNIFORGE_PORT:-8000}:8000"
+    environment:
+      UNIFORGE_DATABASE_URL: "sqlite:////app/data/uniforge.db"
+      UNIFORGE_SECRET_KEY: "${UNIFORGE_SECRET_KEY:-uniforge-dev-secret-change-in-production-7c4d9f1a2b8e5a0c3f6e1d9b}"
+      UNIFORGE_TOKEN_EXPIRE_MINUTES: "${UNIFORGE_TOKEN_EXPIRE_MINUTES:-10080}"
+    volumes:
+      - uniforge_data:/app/data
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  uniforge_data:
