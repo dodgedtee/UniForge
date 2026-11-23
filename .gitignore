@@ -1,2 +1,7 @@
 .venv
 planning.md
+__pycache__/
+*.pyc
+*.db
+.pytest_cache/
+.env

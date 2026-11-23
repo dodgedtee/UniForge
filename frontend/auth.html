@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In &amp; Register — UniForge</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body class="auth-body">
+  <!-- Minimal Top Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="start.html" class="nav-brand">
+        <div class="brand-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <span class="brand-title">UniForge</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="start.html" class="nav-link">Home</a>
+        <a href="explore.html" class="nav-link">Explore</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="explore.html" class="btn btn-secondary btn-nav-cta">Browse Hub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Authorization Shell -->
+  <main class="auth-main">
+    <div class="auth-container">
+      <!-- Left Info Panel -->
+      <section class="auth-showcase" aria-label="UniForge Student Access">
+        <div class="auth-badge">
+          <span class="badge-dot"></span>
+          <span>Student-Only Collaboration Network</span>
+        </div>
+        <h1 class="auth-showcase-title">
+          Build real software with committed university teammates.
+        </h1>
+        <p class="auth-showcase-desc">
+          Sign in to launch projects, recruit hackathon squads, sync your student portfolio, and track verified contribution achievements.
+        </p>
+
+        <ul class="auth-highlights">
+          <li>
+            <span class="highlight-icon" aria-hidden="true">&#10003;</span>
+            <div>
+              <strong>JWT-Protected Student Account</strong>
+              <p>Your profile, listings, likes, and contribution requests stay securely tied to your account.</p>
+            </div>
+          </li>
+          <li>
+            <span class="highlight-icon" aria-hidden="true">&#10003;</span>
+            <div>
+              <strong>Cross-University Teammate Discovery</strong>
+              <p>Connect with builders across SDU, KBTU, Nazarbayev University, and AITU.</p>
+            </div>
+          </li>
+          <li>
+            <span class="highlight-icon" aria-hidden="true">&#10003;</span>
+            <div>
+              <strong>Real Portfolio &amp; Contribution Tracking</strong>
+              <p>Showcase projects you created and build verifiable proof of teamwork.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Right Auth Card -->
+      <section class="auth-card" aria-label="Authorization Form">
+        <!-- Active Session Banner (hidden unless already logged in) -->
+        <div class="session-banner hidden" id="active-session-banner">
+          <div class="session-banner-info">
+            <span class="session-pill">Signed In</span>
+            <h2 id="session-user-name">Student</h2>
+            <p id="session-user-meta">email &bull; university</p>
+          </div>
+          <div class="session-banner-actions">
+            <a href="explore.html" class="btn btn-primary">Go to Explore</a>
+            <a href="profile/profile.html" class="btn btn-secondary">My Profile</a>
+            <button type="button" class="btn btn-secondary" id="btn-session-logout">Sign Out</button>
+          </div>
+        </div>
+
+        <!-- Auth Tabs -->
+        <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+          <button
+            type="button"
+            class="auth-tab active"
+            id="tab-login"
+            role="tab"
+            aria-selected="true"
+            aria-controls="login-panel"
+          >
+            Sign In
+          </button>
+          <button
+            type="button"
+            class="auth-tab"
+            id="tab-register"
+            role="tab"
+            aria-selected="false"
+            aria-controls="register-panel"
+          >
+            Create Account
+          </button>
+        </div>
+
+        <!-- Feedback Alert -->
+        <div class="auth-alert hidden" id="auth-alert" role="alert"></div>
+
+        <!-- Sign In Form -->
+        <form id="login-panel" class="auth-form" role="tabpanel" aria-labelledby="tab-login" novalidate>
+          <div class="auth-form-header">
+            <h2>Welcome back</h2>
+            <p>Sign in with your UniForge student credentials.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="login-email">Student Email</label>
+            <input
+              type="email"
+              id="login-email"
+              class="form-input"
+              placeholder="name@sdu.edu.kz"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <div class="password-field">
+              <input
+                type="password"
+                id="login-password"
+                class="form-input"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              >
+              <button type="button" class="password-toggle" data-toggle-password="login-password" aria-label="Show password">
+                Show
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-large auth-submit-btn" id="btn-login-submit">
+            <span>Sign In</span>
+          </button>
+
+          <p class="auth-switch-hint">
+            New to UniForge?
+            <button type="button" class="auth-link-btn" data-switch-tab="register">Create a student account</button>
+          </p>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-panel" class="auth-form hidden" role="tabpanel" aria-labelledby="tab-register" novalidate>
+          <div class="auth-form-header">
+            <h2>Create your student account</h2>
+            <p>Set up your university profile to start collaborating.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-name">Full Name</label>
+            <input
+              type="text"
+              id="reg-name"
+              class="form-input"
+              placeholder="e.g. Alikhan Saparov"
+              autocomplete="name"
+              minlength="2"
+              maxlength="100"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="reg-email">Student Email</label>
+            <input
+              type="email"
+              id="reg-email"
+              class="form-input"
+              placeholder="e.g. alikhan@sdu.edu.kz"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="auth-two-col">
+            <div class="form-group">
+              <label for="reg-university">University</label>
+              <select id="reg-university" class="form-input" required>
+                <option value="" disabled selected>Select university</option>
+                <option value="SDU">SDU</option>
+                <option value="KBTU">KBTU</option>
+                <option value="Nazarbayev University">Nazarbayev University</option>
+                <option value="AITU">AITU</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-role">Primary Role</label>
+              <select id="reg-role" class="form-input" required>
+                <option value="" disabled selected>Select role</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+                <option value="AI / ML">AI / ML</option>
+                <option value="UI/UX">UI/UX</option>
+                <option value="Mobile">Mobile</option>
+                <option value="Security">Security</option>
+                <option value="QA">QA</option>
+                <option value="Algorithms">Algorithms</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <span class="auth-field-label">Technical Skills (Optional)</span>
+            <div class="choice-chips" id="reg-skills" role="group" aria-label="Technical Skills">
+              <label class="choice-chip"><input type="checkbox" value="Python"><span>Python</span></label>
+              <label class="choice-chip"><input type="checkbox" value="React"><span>React</span></label>
+              <label class="choice-chip"><input type="checkbox" value="FastAPI"><span>FastAPI</span></label>
+              <label class="choice-chip"><input type="checkbox" value="LangGraph"><span>LangGraph</span></label>
+              <label class="choice-chip"><input type="checkbox" value="Node.js"><span>Node.js</span></label>
+              <label class="choice-chip"><input type="checkbox" value="Java"><span>Java</span></label>
+              <label class="choice-chip"><input type="checkbox" value="PostgreSQL"><span>PostgreSQL</span></label>
+              <label class="choice-chip"><input type="checkbox" value="Docker"><span>Docker</span></label>
+              <label class="choice-chip"><input type="checkbox" value="Go"><span>Go</span></label>
+              <label class="choice-chip"><input type="checkbox" value="C++"><span>C++</span></label>
+              <label class="choice-chip"><input type="checkbox" value="Flutter"><span>Flutter</span></label>
+            </div>
+          </div>
+
+          <div class="auth-two-col">
+            <div class="form-group">
+              <label for="reg-password">Password</label>
+              <div class="password-field">
+                <input
+                  type="password"
+                  id="reg-password"
+                  class="form-input"
+                  placeholder="Min. 8 characters"
+                  autocomplete="new-password"
+                  minlength="8"
+                  required
+                >
+                <button type="button" class="password-toggle" data-toggle-password="reg-password" aria-label="Show password">
+                  Show
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-password-confirm">Confirm Password</label>
+              <div class="password-field">
+                <input
+                  type="password"
+                  id="reg-password-confirm"
+                  class="form-input"
+                  placeholder="Repeat password"
+                  autocomplete="new-password"
+                  minlength="8"
+                  required
+                >
+                <button type="button" class="password-toggle" data-toggle-password="reg-password-confirm" aria-label="Show password">
+                  Show
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-large auth-submit-btn" id="btn-register-submit">
+            <span>Create Account</span>
+          </button>
+
+          <p class="auth-switch-hint">
+            Already have an account?
+            <button type="button" class="auth-link-btn" data-switch-tab="login">Sign in</button>
+          </p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="auth-client.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

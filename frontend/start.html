@@ -24,16 +24,17 @@
         <a href="#how-it-works" class="nav-link">How It Works</a>
         <a href="#features" class="nav-link">Features</a>
         <a href="explore.html" class="nav-link">Explore</a>
+        <a href="auth.html" class="nav-link" data-auth-link data-auth-logged-out="Sign In">Sign In</a>
       </div>
 
       <div class="nav-actions">
-        <button class="btn btn-primary btn-nav-cta" id="btn-nav-join">
+        <a href="auth.html?mode=register" class="btn btn-primary btn-nav-cta">
           <span>Join as Student</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </button>
+        </a>
 
         <a href="profile/profile.html" class="user-profile" id="user-profile" title="View Profile" aria-label="User Profile">
           <img src="avatar.png" alt="Profile Picture" class="profile-pic" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2394a3b8\'><path d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/></svg>';">
@@ -56,9 +57,10 @@
       <a href="#how-it-works" class="mobile-link">How It Works</a>
       <a href="#features" class="mobile-link">Features</a>
       <a href="explore.html" class="mobile-link">Explore</a>
-      <button class="btn btn-primary mobile-cta-btn" id="mobile-btn-join">
+      <a href="auth.html" class="mobile-link" data-auth-link data-auth-logged-out="Sign In">Sign In</a>
+      <a href="auth.html?mode=register" class="btn btn-primary mobile-cta-btn">
         Join as Student
-      </button>
+      </a>
     </div>
   </nav>
 
@@ -80,7 +82,7 @@
       </p>
 
       <div class="hero-actions">
-        <a href="#join" class="btn btn-primary btn-large">
+        <a href="auth.html?mode=register" class="btn btn-primary btn-large">
           <span>Get Started with Student ID</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -318,13 +320,13 @@
             Stop coding in isolation or gambling on random hackathon chats. Join UniForge and build alongside committed university students.
           </p>
           <div class="cta-actions">
-            <button class="btn btn-white btn-large" id="btn-cta-signup">
+            <a href="auth.html?mode=register" class="btn btn-white btn-large">
               <span>Sign Up with Student ID</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
-            </button>
+            </a>
           </div>
           <p class="cta-footnote">Free forever for university students • Quick 2-minute verification</p>
         </div>
@@ -406,6 +408,7 @@
   <div class="toast-container" id="toast-container"></div>
 
   <!-- JavaScript -->
+  <script src="auth-client.js"></script>
   <script src="start.js"></script>
 
   <script src="avatar-sync.js"></script>

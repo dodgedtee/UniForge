@@ -292,6 +292,21 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        if (window.UniForgeAuth?.isLoggedIn()) {
+            window.UniForgeAuth
+                .updateProfile({
+                    full_name: profile.name,
+                    university: profile.university,
+                    role: profile.role,
+                    about: profile.about,
+                    skills: profile.skills,
+                    github: profile.github,
+                    linkedin: profile.linkedin,
+                    telegram: profile.telegram
+                })
+                .catch(err => console.warn("Backend profile sync skipped:", err));
+        }
+
         renderProfile(profile);
         closeModal();
     });

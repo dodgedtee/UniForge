@@ -25,6 +25,7 @@
         <a href="explore.html" class="nav-link nav-link-active">Explore</a>
         <a href="explore.html?type=project" class="nav-link">Projects</a>
         <a href="explore.html?type=hackathon" class="nav-link">Hackathons</a>
+        <a href="auth.html" class="nav-link" data-auth-link data-auth-logged-out="Sign In">Sign In</a>
       </div>
 
       <div class="nav-actions">
@@ -57,6 +58,7 @@
       <a href="explore.html" class="mobile-link">Explore</a>
       <a href="explore.html?type=project" class="mobile-link">Projects</a>
       <a href="explore.html?type=hackathon" class="mobile-link">Hackathons</a>
+      <a href="auth.html" class="mobile-link" data-auth-link data-auth-logged-out="Sign In">Sign In</a>
       <button class="btn btn-dark mobile-cta-btn" id="mobile-btn-new-listing">
         + New Listing
       </button>
@@ -339,6 +341,7 @@
   <div class="toast-container" id="toast-container"></div>
 
   <!-- JavaScript -->
+  <script src="auth-client.js"></script>
   <script src="data.js"></script>
   <script src="explore.js"></script>
 
