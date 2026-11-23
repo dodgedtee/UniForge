@@ -275,15 +275,42 @@
         </div>
         <div class="form-group">
           <label for="new-uni">University / Host</label>
-          <input type="text" id="new-uni" class="form-input" placeholder="e.g. SDU, KBTU, Nazarbayev University" required>
+          <select id="new-uni" class="form-input" required>
+            <option value="" disabled selected>Select university</option>
+            <option value="SDU">SDU</option>
+            <option value="KBTU">KBTU</option>
+            <option value="Nazarbayev University">Nazarbayev University</option>
+            <option value="AITU">AITU</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="new-roles">Roles Needed (comma-separated)</label>
-          <input type="text" id="new-roles" class="form-input" placeholder="e.g. Frontend, Backend, UI/UX" required>
+          <span class="form-label">Roles Needed</span>
+          <div class="choice-chips" id="new-roles" role="group" aria-label="Roles Needed">
+            <label class="choice-chip"><input type="checkbox" value="Frontend"><span>Frontend</span></label>
+            <label class="choice-chip"><input type="checkbox" value="Backend"><span>Backend</span></label>
+            <label class="choice-chip"><input type="checkbox" value="AI / ML"><span>AI / ML</span></label>
+            <label class="choice-chip"><input type="checkbox" value="UI/UX"><span>UI/UX</span></label>
+            <label class="choice-chip"><input type="checkbox" value="Mobile"><span>Mobile</span></label>
+            <label class="choice-chip"><input type="checkbox" value="Security"><span>Security</span></label>
+            <label class="choice-chip"><input type="checkbox" value="QA"><span>QA</span></label>
+            <label class="choice-chip"><input type="checkbox" value="Algorithms"><span>Algorithms</span></label>
+          </div>
         </div>
         <div class="form-group">
-          <label for="new-tech">Tech Stack (comma-separated)</label>
-          <input type="text" id="new-tech" class="form-input" placeholder="e.g. Python, React, FastAPI" required>
+          <span class="form-label">Tech Stack</span>
+          <div class="choice-chips" id="new-tech" role="group" aria-label="Tech Stack">
+            <label class="choice-chip"><input type="checkbox" value="Python"><span>Python</span></label>
+            <label class="choice-chip"><input type="checkbox" value="React"><span>React</span></label>
+            <label class="choice-chip"><input type="checkbox" value="FastAPI"><span>FastAPI</span></label>
+            <label class="choice-chip"><input type="checkbox" value="LangGraph"><span>LangGraph</span></label>
+            <label class="choice-chip"><input type="checkbox" value="Node.js"><span>Node.js</span></label>
+            <label class="choice-chip"><input type="checkbox" value="Java"><span>Java</span></label>
+            <label class="choice-chip"><input type="checkbox" value="PostgreSQL"><span>PostgreSQL</span></label>
+            <label class="choice-chip"><input type="checkbox" value="Docker"><span>Docker</span></label>
+            <label class="choice-chip"><input type="checkbox" value="Go"><span>Go</span></label>
+            <label class="choice-chip"><input type="checkbox" value="C++"><span>C++</span></label>
+            <label class="choice-chip"><input type="checkbox" value="Flutter"><span>Flutter</span></label>
+          </div>
         </div>
         <div class="form-group">
           <label for="new-desc">Short Description</label>
@@ -298,15 +325,6 @@
                 id="new-github"
                 class="form-input"
                 placeholder="https://github.com/username/repository">
-        </div>
-
-        <!-- Project Status (Projects only) -->
-        <div class="form-group" id="create-status-group">
-            <label for="new-status">Project Status</label>
-            <select id="new-status" class="form-input">
-                <option value="in-progress">In Progress</option>
-                <option value="completed">Completed</option>
-            </select>
         </div>
 
         <div class="modal-actions">

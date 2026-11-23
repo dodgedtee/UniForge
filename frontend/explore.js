@@ -432,30 +432,26 @@ function setupCreateModal() {
 
   const typeSelect = document.getElementById("new-type");
   const githubGroup = document.getElementById("create-github-group");
-  const statusGroup = document.getElementById("create-status-group");
 
   const updateProjectFields = () => {
-      const isProject = typeSelect?.value === "project";
-
-      if (githubGroup) {
-          githubGroup.style.display = isProject ? "" : "none";
-      }
-
-      if (statusGroup) {
-          statusGroup.style.display = isProject ? "" : "none";
-      }
+    const isProject = typeSelect?.value === "project";
+    if (githubGroup) {
+      githubGroup.style.display = isProject ? "" : "none";
+    }
   };
 
   typeSelect?.addEventListener("change", updateProjectFields);
 
+  const getCheckedValues = groupId =>
+    Array.from(document.querySelectorAll(`#${groupId} input[type="checkbox"]:checked`)).map(
+      input => input.value
+    );
 
-  
   const openCreate = () => {
-      createForm?.reset();
-      updateProjectFields();
-      createModal?.classList.remove("hidden");
+    createForm?.reset();
+    updateProjectFields();
+    createModal?.classList.remove("hidden");
   };
-
 
   document.getElementById("btn-new-listing")?.addEventListener("click", openCreate);
   document.getElementById("mobile-btn-new-listing")?.addEventListener("click", openCreate);
@@ -466,28 +462,29 @@ function setupCreateModal() {
     e.preventDefault();
     const type = document.getElementById("new-type").value;
     const title = document.getElementById("new-title").value.trim();
-    const uni = document.getElementById("new-uni").value.trim();
-    const rolesRaw = document.getElementById("new-roles").value;
-    const techRaw = document.getElementById("new-tech").value;
+    const uni = document.getElementById("new-uni").value;
+    const roles = getCheckedValues("new-roles");
+    const tech = getCheckedValues("new-tech");
     const desc = document.getElementById("new-desc").value.trim();
 
-    const githubInput = document.getElementById("new-github");
-    const statusInput = document.getElementById("new-status");
+    if (roles.length === 0 || tech.length === 0) {
+      showToast("Please select at least one role and one technology.");
+      return;
+    }
 
+    const githubInput = document.getElementById("new-github");
     const github = githubInput.value.trim();
-    const status = statusInput.value;
 
     const newItem = {
       id: Date.now(),
       ownerId: window.UniForgeData.getCurrentUserId(),
       github: type === "project" ? github : "",
-      status: type === "project" ? status : "",
       type,
       title,
       desc,
       overview: desc,
-      roles: rolesRaw.split(",").map(s => s.trim()).filter(Boolean),
-      tech: techRaw.split(",").map(s => s.trim()).filter(Boolean),
+      roles,
+      tech,
       uni,
       leader: "You (Verified Student)",
       ...(type === "project"
