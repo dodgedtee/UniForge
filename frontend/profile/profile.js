@@ -152,15 +152,44 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function setCheckedChips(container, values) {
+        const selected = new Set(values || []);
+        container.querySelectorAll('input[type="checkbox"]').forEach(input => {
+            input.checked = selected.has(input.value);
+        });
+    }
+
+    function getCheckedChips(container) {
+        return Array.from(
+            container.querySelectorAll('input[type="checkbox"]:checked')
+        ).map(input => input.value);
+    }
+
+    function setSelectValue(selectEl, value) {
+        const options = Array.from(selectEl.options).filter(opt => !opt.disabled);
+        const exact = options.find(opt => opt.value === value);
+        if (exact) {
+            selectEl.value = exact.value;
+            return;
+        }
+        const partial = value
+            ? options.find(opt => value.toLowerCase().includes(opt.value.toLowerCase()))
+            : null;
+        selectEl.value = partial ? partial.value : (options[0]?.value || "");
+    }
+
     function openModal() {
         nameInput.value = nameEl.textContent.trim();
-        universityInput.value = universityEl.textContent.trim();
-        roleInput.value = roleEl.textContent.trim();
+        setSelectValue(universityInput, universityEl.textContent.trim());
+        setSelectValue(roleInput, roleEl.textContent.trim());
         aboutInput.value = aboutEl.textContent.trim();
 
-        skillsInput.value = Array.from(
-            skillsEl.querySelectorAll(".skill-tag")
-        ).map(skill => skill.textContent.trim()).join(", ");
+        setCheckedChips(
+            skillsInput,
+            Array.from(skillsEl.querySelectorAll(".skill-tag")).map(skill =>
+                skill.textContent.trim()
+            )
+        );
 
 
         const savedProfile = loadProfile();
@@ -203,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.key === "Tab") {
             const controls = Array.from(
                 modal.querySelectorAll(
-                    "button, input, textarea"
+                    "button, input, textarea, select"
                 )
             ).filter(el => !el.disabled);
 
@@ -226,15 +255,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 
         const profile = {
             name: nameInput.value.trim(),
-            university: universityInput.value.trim(),
-            role: roleInput.value.trim(),
+            university: universityInput.value,
+            role: roleInput.value,
             about: aboutInput.value.trim(),
-            skills: [...new Set(
-                skillsInput.value
-                    .split(",")
-                    .map(skill => skill.trim())
-                    .filter(Boolean)
-            )],
+            skills: getCheckedChips(skillsInput),
             github: githubInput.value.trim(),
             linkedin: linkedinInput.value.trim(),
             telegram: telegramInput.value.trim()
@@ -703,7 +727,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const universityInput = document.getElementById("project-university");
     const rolesInput = document.getElementById("project-roles");
     const githubInput = document.getElementById("project-github");
-    const statusInput = document.getElementById("project-status");
 
     const projectsList = document.getElementById("profile-projects");
     const emptyState = document.getElementById("projects-empty");
@@ -807,8 +830,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 leader: info.name,
                 github: typeof old.github === "string"
                     ? old.github : "",
-                status: ["in-progress", "completed"].includes(old.status)
-                    ? old.status : "in-progress",
                 contributorsCount: 1,
                 createdText: "Previously added",
                 createdDays: 0,
@@ -901,18 +922,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             title.appendChild(titleLink);
 
-            const statusValue = project.status === "completed"
-                ? "completed" : "in-progress";
-
-            const status = createElement(
-                "span",
-                `project-status project-status-${statusValue}`,
-                statusValue === "completed"
-                    ? "Completed"
-                    : "In Progress"
-            );
-
-            top.append(title, status);
+            top.append(title);
 
             const description = createElement(
                 "p",
@@ -997,9 +1007,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function setCheckedChips(container, values) {
+        const selected = new Set(values || []);
+        container.querySelectorAll('input[type="checkbox"]').forEach(input => {
+            input.checked = selected.has(input.value);
+        });
+    }
+
+    function getCheckedChips(container) {
+        return Array.from(
+            container.querySelectorAll('input[type="checkbox"]:checked')
+        ).map(input => input.value);
+    }
+
     function openAddModal() {
         editingProjectId = null;
         form.reset();
+        setCheckedChips(rolesInput, []);
+        setCheckedChips(technologiesInput, []);
 
         modalTitle.textContent = "Add New Project";
         previousFocus = document.activeElement;
@@ -1020,11 +1045,9 @@ document.addEventListener("DOMContentLoaded", () => {
         nameInput.value = project.title;
         descriptionInput.value = project.desc || "";
         universityInput.value = project.uni || "";
-        rolesInput.value = (project.roles || []).join(", ");
-        technologiesInput.value = (project.tech || [])
-            .join(", ");
+        setCheckedChips(rolesInput, project.roles || []);
+        setCheckedChips(technologiesInput, project.tech || []);
         githubInput.value = project.github || "";
-        statusInput.value = project.status || "in-progress";
 
         modalTitle.textContent = "Edit Project";
         previousFocus = document.activeElement;
@@ -1064,44 +1087,29 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", event => {
         event.preventDefault();
 
-        const uni = universityInput.value.trim();
-
-        const roles = [...new Set(
-            rolesInput.value
-                .split(",")
-                .map(value => value.trim())
-                .filter(Boolean)
-        )];
-
+        const uni = universityInput.value;
+        const roles = getCheckedChips(rolesInput);
         const title = nameInput.value.trim();
         const desc = descriptionInput.value.trim();
-
-        const tech = [...new Set(
-            technologiesInput.value
-                .split(",")
-                .map(value => value.trim())
-                .filter(Boolean)
-        )];
+        const tech = getCheckedChips(technologiesInput);
 
         const github = validateGithubUrl(
             githubInput.value.trim()
         );
-
-        const status = statusInput.value;
 
         if (!title || !desc || !uni) {
             alert("Project name, description and university are required.");
             return;
         }
 
-        if (github === null) {
-            alert("Enter a valid HTTPS GitHub URL.");
-            githubInput.focus();
+        if (roles.length === 0 || tech.length === 0) {
+            alert("Please select at least one role and one technology.");
             return;
         }
 
-        if (!["in-progress", "completed"].includes(status)) {
-            alert("Select a valid project status.");
+        if (github === null) {
+            alert("Enter a valid HTTPS GitHub URL.");
+            githubInput.focus();
             return;
         }
 
@@ -1112,8 +1120,7 @@ document.addEventListener("DOMContentLoaded", () => {
             uni,
             roles,
             tech,
-            github,
-            status
+            github
         };
 
         if (editingProjectId !== null) {

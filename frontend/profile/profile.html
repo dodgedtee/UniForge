@@ -65,9 +65,9 @@
 
                 <div class="profile-details">
                     <h1 id="profile-name">Student Name</h1>
-                    <p id="profile-university">SDU University</p>
+                    <p id="profile-university">SDU</p>
                     <span class="profile-role" id="profile-role">
-                        Frontend Developer
+                        Frontend
                     </span>
                 </div>
 
@@ -93,9 +93,9 @@
                     <div class="skills-list" id="profile-skills">
                         <span class="skill-tag">C++</span>
                         <span class="skill-tag">Python</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">HTML</span>
-                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">PostgreSQL</span>
                     </div>
                 </section>
 
@@ -211,12 +211,28 @@
 
                 <div class="edit-form-group">
                     <label for="edit-university">University</label>
-                    <input type="text" id="edit-university" required maxlength="100">
+                    <select id="edit-university" required>
+                        <option value="" disabled>Select university</option>
+                        <option value="SDU">SDU</option>
+                        <option value="KBTU">KBTU</option>
+                        <option value="Nazarbayev University">Nazarbayev University</option>
+                        <option value="AITU">AITU</option>
+                    </select>
                 </div>
 
                 <div class="edit-form-group">
                     <label for="edit-role">Role / Specialization</label>
-                    <input type="text" id="edit-role" required maxlength="100">
+                    <select id="edit-role" required>
+                        <option value="" disabled>Select role</option>
+                        <option value="Frontend">Frontend</option>
+                        <option value="Backend">Backend</option>
+                        <option value="AI / ML">AI / ML</option>
+                        <option value="UI/UX">UI/UX</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="Security">Security</option>
+                        <option value="QA">QA</option>
+                        <option value="Algorithms">Algorithms</option>
+                    </select>
                 </div>
 
                 <div class="edit-form-group">
@@ -225,10 +241,20 @@
                 </div>
 
                 <div class="edit-form-group">
-                    <label for="edit-skills">Technical Skills</label>
-                    <input type="text" id="edit-skills"
-                        placeholder="C++, Python, JavaScript">
-                    <small>Separate skills with commas.</small>
+                    <span class="form-label">Technical Skills</span>
+                    <div class="choice-chips" id="edit-skills" role="group" aria-label="Technical Skills">
+                        <label class="choice-chip"><input type="checkbox" value="Python"><span>Python</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="React"><span>React</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="FastAPI"><span>FastAPI</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="LangGraph"><span>LangGraph</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Node.js"><span>Node.js</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Java"><span>Java</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="PostgreSQL"><span>PostgreSQL</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Docker"><span>Docker</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Go"><span>Go</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="C++"><span>C++</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Flutter"><span>Flutter</span></label>
+                    </div>
                 </div>
 
 
@@ -391,36 +417,46 @@
                 <!-- University / Host -->
                 <div class="project-form-group">
                     <label for="project-university">University / Host *</label>
-                    <input
-                        type="text"
-                        id="project-university"
-                        placeholder="e.g. SDU, KBTU, AITU"
-                        maxlength="100"
-                        required>
+                    <select id="project-university" required>
+                        <option value="" disabled selected>Select university</option>
+                        <option value="SDU">SDU</option>
+                        <option value="KBTU">KBTU</option>
+                        <option value="Nazarbayev University">Nazarbayev University</option>
+                        <option value="AITU">AITU</option>
+                    </select>
                 </div>
 
                 <!-- Roles Needed -->
                 <div class="project-form-group">
-                    <label for="project-roles">Roles Needed</label>
-                    <input
-                        type="text"
-                        id="project-roles"
-                        placeholder="Frontend, Backend, UI/UX, AI / ML">
-
-                    <small>Separate roles with commas.</small>
+                    <span class="form-label">Roles Needed *</span>
+                    <div class="choice-chips" id="project-roles" role="group" aria-label="Roles Needed">
+                        <label class="choice-chip"><input type="checkbox" value="Frontend"><span>Frontend</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Backend"><span>Backend</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="AI / ML"><span>AI / ML</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="UI/UX"><span>UI/UX</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Mobile"><span>Mobile</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Security"><span>Security</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="QA"><span>QA</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Algorithms"><span>Algorithms</span></label>
+                    </div>
                 </div>
 
-
+                <!-- Technologies -->
                 <div class="project-form-group">
-                    <label for="project-technologies">
-                        Technologies
-                    </label>
-
-                    <input type="text"
-                        id="project-technologies"
-                        placeholder="HTML, CSS, JavaScript, Python">
-
-                    <small>Separate technologies with commas.</small>
+                    <span class="form-label">Tech Stack *</span>
+                    <div class="choice-chips" id="project-technologies" role="group" aria-label="Tech Stack">
+                        <label class="choice-chip"><input type="checkbox" value="Python"><span>Python</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="React"><span>React</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="FastAPI"><span>FastAPI</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="LangGraph"><span>LangGraph</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Node.js"><span>Node.js</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Java"><span>Java</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="PostgreSQL"><span>PostgreSQL</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Docker"><span>Docker</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Go"><span>Go</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="C++"><span>C++</span></label>
+                        <label class="choice-chip"><input type="checkbox" value="Flutter"><span>Flutter</span></label>
+                    </div>
                 </div>
 
                 <!-- GitHub URL -->
@@ -430,21 +466,6 @@
                     <input type="url"
                         id="project-github"
                         placeholder="https://github.com/username/repository">
-                </div>
-
-                <!-- Project Status -->
-                <div class="project-form-group">
-                    <label for="project-status">Project Status</label>
-
-                    <select id="project-status" required>
-                        <option value="in-progress">
-                            In Progress
-                        </option>
-
-                        <option value="completed">
-                            Completed
-                        </option>
-                    </select>
                 </div>
 
                 <!-- Actions -->
